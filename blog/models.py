@@ -28,8 +28,10 @@ class Post(models.Model):
     published = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
     status = models.CharField(max_length=10, choices=options, default='published')
+
+    # Custom manager
     objects = models.Manager()  # The default manager.
-    post_objects = PostObjects()  # Our custom manager.
+    posts = PostObjects()  # Our custom manager.
 
     class Meta:
         ordering = ('-published',)

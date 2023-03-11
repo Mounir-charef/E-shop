@@ -1,6 +1,8 @@
-def main():
-    print("It's 3/11/2023 at 10:07 AM Mounir")
+from rest_framework import serializers
+from blog.models import Post
 
 
-if __name__ == '__main__':
-    main()
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ('id', 'title', 'author', 'excerpt', 'content', 'published', 'status')
