@@ -1,4 +1,4 @@
-from django.test import TestCase
+# from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APITestCase
 from blog.models import Category
@@ -28,10 +28,10 @@ class PostTests(APITestCase):
         )
         data = {
             'title': 'new',
-            'author': 1,  # pk of test_user1
+            'author': self.testuser1.id,  # pk of test_user1
             'excerpt': 'new',
             'content': 'new',
-            'category': 1  # pk of django
+            'category': self.test_category.id  # pk of django
         }
         url = reverse('blog_api:list_create')
         response = self.client.post(url, data, format='json')
