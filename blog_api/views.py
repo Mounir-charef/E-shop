@@ -1,4 +1,4 @@
-from rest_framework import generics
+# from rest_framework import generics
 from blog.models import Post
 from .serilizers import PostSerializer
 from .pagination import StandardResultsSetPagination
