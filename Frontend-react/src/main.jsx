@@ -7,7 +7,9 @@ import {
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Hero from "./routes/Hero.jsx";
-
+import Login from "./routes/Login.jsx";
+import Register from "./routes/Register.jsx";
+import './index.css'
 
 // const routes = [
 //         { path: '/', element: <Home />},
@@ -33,6 +35,8 @@ const App = () => {
 
 const routes = [
         { path: '/', element: <Hero />},
+        {path: '/register', element: <Register />},
+        { path: 'login', element: <Login /> },
     ]
 
 const router = createBrowserRouter([{element: <App />, children: routes}])
