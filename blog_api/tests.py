@@ -1,7 +1,7 @@
 # from django.test import TestCase
 from rest_framework import status
-from rest_framework.test import APITestCase
-from blog.models import Category
+from rest_framework.test import APITestCase, APIClient
+from blog.models import Category, Post
 from django.contrib.auth.models import User
 from django.urls import reverse
 
@@ -14,7 +14,7 @@ class PostTests(APITestCase):
         """
         Ensure we can view a list of posts.
         """
-        url = reverse('blog_api:list_create')
+        url = reverse('blog_api:posts-list')
         response = self.client.get(url, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -22,17 +22,23 @@ class PostTests(APITestCase):
         """
         Ensure we can create a new post object.
         """
+        client = APIClient()
+
         self.test_category = Category.objects.create(name='django')
-        self.testuser1 = User.objects.create_user(
+        self.test_user = User.objects.create_user(
             username='test_user1', password='123456789'
         )
+        url = reverse('blog_api:posts-list')
+        client.login(username=self.test_user.username, password='123456789')
         data = {
-            'title': 'new',
-            'author': self.testuser1.id,  # pk of test_user1
-            'excerpt': 'new',
-            'content': 'new',
-            'category': self.test_category.id  # pk of django
+            'title': 'Test Title',
+            'content': 'Test Content',
+            'status': 'published',
+            'category': self.test_category.id,
+            'author': self.test_user.id
         }
-        url = reverse('blog_api:list_create')
-        response = self.client.post(url, data, format='json')
+        print(data)
+        response = client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(Post.objects.count(), 1)
+        self.assertEqual(Post.objects.get().title, 'Test Title')
