@@ -9,6 +9,7 @@ import Footer from "./components/Footer.jsx";
 import Hero from "./routes/Hero.jsx";
 import Login from "./routes/Login.jsx";
 import Register from "./routes/Register.jsx";
+import Logout from "./routes/Logout.jsx";
 import './index.css'
 
 // const routes = [
@@ -35,8 +36,9 @@ const App = () => {
 
 const routes = [
         { path: '/', element: <Hero />},
-        {path: '/register', element: <Register />},
+        { path: '/register', element: <Register />},
         { path: 'login', element: <Login /> },
+        { path: 'logout', element: <Logout /> },
     ]
 
 const router = createBrowserRouter([{element: <App />, children: routes}])

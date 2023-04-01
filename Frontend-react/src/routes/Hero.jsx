@@ -20,8 +20,11 @@ const Hero = () => {
         <div>
             <p>hello bois i believe u logged in lemmi check</p>
 			<hr/>
-
-            {localStorage.getItem('access_token')}
+            {localStorage.getItem('access_token') ? (
+                            <p>you are logged in</p>
+                        ) : (
+                            <p>you are not logged in</p>
+                        )}
 			<hr/>
             <PostLoadingComponent isLoading={appState.loading} posts={appState.posts} />
         </div>

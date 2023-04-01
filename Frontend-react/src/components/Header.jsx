@@ -8,6 +8,7 @@ const Header = () => {
                 <Link className='p-5 text-sky-400/100' to="/">Home</Link>
                 <Link className='p-5 text-sky-400/100' to="/login">login</Link>
                 <Link className='p-5 text-sky-400/100' to="/register">register</Link>
+                <Link className='p-5 text-sky-400/100'  to='/logout' >Logout </Link>
             </NavBar>
         </>
     );
