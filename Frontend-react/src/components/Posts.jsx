@@ -1,21 +1,17 @@
-const Posts = ({posts}) => {
-	if (!posts || posts.length === 0) return <p>Can not find any posts, sorry</p>;
-	return (
-		<>
-			<h1 className='text-lg'>Posts</h1>
-			{posts.results.map((post, index) => {
-				return (
-					<div key={index} className="card">
-						<div className="card-body">
-							<h5 className="card-title">{post.title}</h5>
-							<p className="card-text">{post.content}</p>
-						</div>
-					</div>
-				);
-			})}
-			<p> - Number of posts is : {posts.count}</p>
+// a React component that renders a list of posts and every post is a square card with tailwind
 
-		</>
-	);
-};
-export default Posts;
+const posts = ({ posts }) => {
+    return (
+        <div className="grid grid-cols-3 gap-4">
+            {posts.map((post) => (
+                <div key={post.id} className="bg-gray-100 rounded shadow p-6">
+                    <h3 className="font-bold text-xl mb-3">{post.title}</h3>
+                    <p className="text-gray-600">{post.user_name}</p>
+                    <p>{post.content}</p>
+                </div>
+            ))}
+        </div>
+    );
+}
+
+export default posts;

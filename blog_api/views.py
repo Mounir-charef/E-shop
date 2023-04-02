@@ -2,7 +2,7 @@
 from blog.models import Post
 from blog.permissions import PostUserWritePermission
 from .serilizers import PostSerializer
-from .pagination import StandardResultsSetPagination
+from . import pagination
 from rest_framework import viewsets
 from rest_framework.response import Response
 
@@ -21,7 +21,7 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [PostUserWritePermission]
-    pagination_class = StandardResultsSetPagination
+    pagination_class = pagination.OptimizedPagination
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(Post.posts.all())

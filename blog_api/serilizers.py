@@ -3,8 +3,7 @@ from blog.models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.ReadOnlyField(source='author.username')
-
+    user_name = serializers.CharField(source='author.user_name', read_only=True)
     class Meta:
         model = Post
-        fields = ('id', 'title', 'author', 'excerpt', 'content', 'published', 'status')
+        fields = ('id', 'title', 'user_name', 'excerpt', 'content', 'published', 'status')

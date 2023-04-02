@@ -12,7 +12,6 @@ class CustomUserCreate(APIView):
     @staticmethod
     def post(request):
         try:
-            print(request.data)
             serializer = RegisterUserSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
@@ -28,8 +27,7 @@ class BlackListTokenUpdateView(APIView):
     @staticmethod
     def post(request):
         try:
-            refresh_token = request.data["refresh_token"]
-            token = RefreshToken(refresh_token)
+            token = RefreshToken(request.data["refresh_token"])
             token.blacklist()
             return Response(status=status.HTTP_205_RESET_CONTENT)
         except Exception as e:

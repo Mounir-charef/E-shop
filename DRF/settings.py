@@ -134,7 +134,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
-    'DEFAULT_PAGINATION_CLASS': 'blog_api.pagination.OptimizedPagination',
+    # 'DEFAULT_PAGINATION_CLASS': 'blog_api.pagination.OptimizedPagination',
 }
 
 # Permissions

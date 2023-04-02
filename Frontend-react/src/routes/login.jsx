@@ -9,9 +9,9 @@ const login = () => {
         password: "",
     });
 
-    const [formData, updateFormData] = useState(initialFormData);
+    const [formData, setFormData] = useState(initialFormData);
     const handleChange = (e) => {
-        updateFormData({
+        setFormData({
             ...formData,
             [e.target.name]: e.target.value.trim(),
         });
@@ -19,27 +19,28 @@ const login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
         axiosInstance
             .post(`token/`, {
                 email: formData.email,
                 password: formData.password,
             })
             .then((res) => {
-                localStorage.setItem('access_token', res.data.access);
-                localStorage.setItem('refresh_token', res.data.refresh);
-                axiosInstance.defaults.headers['Authorization'] =
-                    'JWT ' + localStorage.getItem('access_token');
-                console.log(res);
-                console.log(res.data);
-                navigate("/", {replace: true});
+                if(res.status === 200){
+                    localStorage.setItem("access_token", res.data.access);
+                    localStorage.setItem("refresh_token", res.data.refresh);
+                    navigate("/", {replace: true});
+                }else{
+                    alert("error while logging in, please try again!!");
+                }
             }).catch((err) => console.log(err));
+        setFormData(initialFormData);
     }
 
     return (
         <div className="p-5">
             <form onSubmit={handleSubmit}>
                 <input
+                    value={formData.email}
                     type='text'
                     onChange={handleChange}
                     autoComplete='email'
@@ -50,7 +51,8 @@ const login = () => {
                     className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
                 />
                 <input type="password"
-                          onChange={handleChange}
+                            value={formData.password}
+                            onChange={handleChange}
                             autoComplete='current-password'
                             name='password'
                             placeholder='Password'
