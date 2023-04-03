@@ -1,8 +1,10 @@
 import axiosInstance from "../axios";
-import {useState} from "react";
+import {useState, useContext} from "react";
+import AuthContext from "../AuthContext.jsx";
 import {useNavigate} from "react-router-dom";
 
 const login = () => {
+    const {setToken} = useContext(AuthContext);
     const navigate = useNavigate();
     const initialFormData = Object.freeze({
         email: "",
@@ -26,7 +28,7 @@ const login = () => {
             })
             .then((res) => {
                 if(res.status === 200){
-                    localStorage.setItem("access_token", res.data.access);
+                    setToken(res.data.access);
                     localStorage.setItem("refresh_token", res.data.refresh);
                     navigate("/", {replace: true});
                 }else{
