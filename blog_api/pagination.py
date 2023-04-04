@@ -10,7 +10,7 @@ class StandardResultsSetPagination(PageNumberPagination):
 
 class OptimizedPagination(CursorPagination):
     page_size = 2
-    ordering = 'published'
+    ordering = '-published'
 
 
 class LargeResultsSetPagination(PageNumberPagination):
