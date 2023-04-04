@@ -6,6 +6,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+# from rest_framework_swagger.views import get_swagger_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,5 @@ urlpatterns = [
         title="My API",
         description="API for all things …",
     ), name='docs'),
+    # path('swagger-docs/', get_swagger_view(title='My API'), name='swagger-docs'),
 ]

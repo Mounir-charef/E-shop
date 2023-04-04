@@ -1,5 +1,6 @@
 # from rest_framework import generics
 # from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
 
 from blog.models import Post
 from blog.permissions import PostUserWritePermission
@@ -7,6 +8,8 @@ from .serilizers import PostSerializer
 from . import pagination
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+
+
 # from rest_framework.response import Response
 
 # class PostList(generics.ListCreateAPIView):
@@ -57,7 +60,8 @@ class PostViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         if self.action in ['retrieve', 'update', 'partial_update', 'destroy']:
-            return Post.posts.all()
+            slug = self.kwargs.get('slug')
+            return Post.posts.all(slug=slug)
         return self.queryset
 
     # def get_object(self):
