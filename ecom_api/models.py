@@ -25,6 +25,8 @@ class Product(models.Model):
     price = models.DecimalField(_("price"), max_digits=8, decimal_places=2)
     image = models.ImageField(_("image"), upload_to='products')
     status = models.CharField(_("status"), max_length=20, choices=STATUS_CHOICES, default='available')
+    created_at = models.DateTimeField(_("created at"), auto_now_add=True)
+    updated_at = models.DateTimeField(_("updated at"), auto_now=True)
 
     def __str__(self):
         return self.name

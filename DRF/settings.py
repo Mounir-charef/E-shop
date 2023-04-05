@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from datetime import timedelta
 from django.conf import settings
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +44,8 @@ INSTALLED_APPS = [
     'blog',
     'blog_api',
     'user',
+    'ecom_api',
+    'django_filters',
     'django_extensions',
     'rest_framework_simplejwt.token_blacklist',
     'uritemplate',
@@ -153,6 +156,10 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:5173',
 ]
+
+MEDIA_URL = '/products/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'products')
+
 
 AUTH_USER_MODEL = 'user.User'
 
