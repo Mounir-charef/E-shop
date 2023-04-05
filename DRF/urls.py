@@ -16,6 +16,7 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/', include('blog_api.urls', namespace='blog_api')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/ecom', include('ecom_api.urls', namespace='ecom_api')),
     path('shema/', get_schema_view(
         title="My API",
         description="API for all things …",
