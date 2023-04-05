@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from django.db.models import Q
 from .models import Category, Product, Cart, Order
 from .serializers import CategorySerializer, ProductSerializer, CartSerializer, OrderSerializer
 from .permissions import IsOwnerOrReadOnly
@@ -14,12 +15,18 @@ from .filters import ProductFilter
 class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    # permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
     permission_classes = [AllowAny]
     pagination_class = CustomCursorPagination
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend]
     filterset_class = ProductFilter
-    search_fields = ['name', 'category__name']
+    search_fields = ['name']
+
+    def get_queryset(self):
+        queryset = self.queryset
+        search_query = self.request.query_params.get('search', None)
+        if search_query:
+            queryset = queryset.filter(Q(name__icontains=search_query) | Q(category__name__icontains=search_query))
+        return queryset
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
