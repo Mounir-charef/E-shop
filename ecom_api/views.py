@@ -1,10 +1,6 @@
-from rest_framework import viewsets, status
+from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import filters
-from django.db.models import Q
 from .models import Category, Product, Cart, Order
 from .serializers import CategorySerializer, ProductSerializer, CartSerializer, OrderSerializer
 from .permissions import IsOwnerOrReadOnly
@@ -12,7 +8,7 @@ from .paginations import CustomCursorPagination
 from .filters import ProductFilter
 
 
-class ProductViewSet(viewsets.ModelViewSet):
+class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [AllowAny]
@@ -23,16 +19,17 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = self.queryset
-        search_query = self.request.query_params.get('search', None)
-        if search_query:
-            queryset = queryset.filter(Q(name__icontains=search_query) | Q(category__name__icontains=search_query))
+        # to add search functionality for both name and category if needed
+        # search_query = self.request.query_params.get('search', None)
+        # if search_query:
+        #     queryset = queryset.filter(Q(name__icontains=search_query) | Q(category__name__icontains=search_query))
         return queryset
 
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
     def get_queryset(self):
         if self.action in ['list', 'retrieve']:
@@ -40,65 +37,25 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
         return Category.objects.none()
 
 
-class CartViewSet(viewsets.ViewSet):
-    permission_classes = [IsAuthenticated]
+class CartViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    pagination_class = CustomCursorPagination
+    serializer_class = CartSerializer
 
-    def list(self, request):
-        queryset = Cart.objects.filter(user=request.user)
-        serializer = CartSerializer(queryset, many=True)
-        return Response(serializer.data)
+    def get_queryset(self):
+        return Cart.objects.filter(user=self.request.user)
 
-    def create(self, request):
-        serializer = CartSerializer(data=request.data, context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        serializer.save(user=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def retrieve(self, request, pk=None):
-        cart = get_object_or_404(Cart.objects.filter(user=request.user), pk=pk)
-        serializer = CartSerializer(cart)
-        return Response(serializer.data)
-
-    def destroy(self, request, pk=None):
-        cart = get_object_or_404(Cart.objects.filter(user=request.user), pk=pk)
-        cart.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-    def update(self, request, pk=None):
-        cart = get_object_or_404(Cart.objects.filter(user=request.user), pk=pk)
-        serializer = CartSerializer(cart, data=request.data, partial=True, context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        serializer.save(user=request.user)
-        return Response(serializer.data)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
 
 
-class OrderViewSet(viewsets.ViewSet):
-    permission_classes = [IsAuthenticated]
+class OrderViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
+    pagination_class = CustomCursorPagination
+    serializer_class = OrderSerializer
 
-    def list(self, request):
-        queryset = Order.objects.filter(user=request.user)
-        serializer = OrderSerializer(queryset, many=True)
-        return Response(serializer.data)
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user)
 
-    def create(self, request):
-        serializer = OrderSerializer(data=request.data, context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        serializer.save(user=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-
-    def retrieve(self, request, pk=None):
-        order = get_object_or_404(Order.objects.filter(user=request.user), pk=pk)
-        serializer = OrderSerializer(order)
-        return Response(serializer.data)
-
-    def destroy(self, request, pk=None):
-        order = get_object_or_404(Order.objects.filter(user=request.user), pk=pk)
-        order.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-    def update(self, request, pk=None):
-        order = get_object_or_404(Order.objects.filter(user=request.user), pk=pk)
-        serializer = OrderSerializer(order, data=request.data, partial=True, context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        serializer.save(user=request.user)
-        return Response(serializer.data)
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

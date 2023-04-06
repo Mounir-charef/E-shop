@@ -1,8 +1,9 @@
 from django.db import models
-from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 
-User = settings.AUTH_USER_MODEL
+
+User = get_user_model()
 
 
 class Category(models.Model):
@@ -23,7 +24,7 @@ class Product(models.Model):
     description = models.TextField(_("description"))
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_("category"))
     price = models.DecimalField(_("price"), max_digits=8, decimal_places=2)
-    image = models.ImageField(_("image"), upload_to='products')
+    image = models.URLField(_("image"), max_length=200)
     status = models.CharField(_("status"), max_length=20, choices=STATUS_CHOICES, default='available')
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("updated at"), auto_now=True)

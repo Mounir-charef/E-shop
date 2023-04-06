@@ -31,6 +31,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     user_name = models.CharField(max_length=150, unique=True)
     first_name = models.CharField(max_length=150, blank=True)
     about = models.TextField(_('about'), max_length=500, blank=True)
+    image_url = models.URLField(_('image url'), max_length=200, blank=True,
+                                default='https://robohash.org/hicveldicta.png?size=50x50&set=set1')
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(default=timezone.now)
