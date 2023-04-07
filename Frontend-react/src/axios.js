@@ -1,15 +1,15 @@
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 
-const baseURL = 'http://localhost:8000/api/';
-const accessToken = localStorage.getItem('access_token');
 
 const axiosInstance = axios.create({
-    baseURL: baseURL,
+	timeout: 5000,
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        Authorization: accessToken? `Bearer ${accessToken}` : null,
+		Authorization: localStorage.getItem('access_token')
+			? 'JWT ' + localStorage.getItem('access_token')
+			: null,
     }
 });
 
@@ -31,7 +31,13 @@ axiosInstance.interceptors.response.use(
 
 		if (
 			error.response.status === 401 &&
-			originalRequest.url === baseURL + 'token/refresh/'
+			(
+				originalRequest.url === baseURL + 'token/refresh/'
+			) ||
+			(
+				error.response.data.detail === 'Authentication credentials were not provided.' &&
+				error.response.statusText === 'Unauthorized'
+			)
 		) {
 			window.location.href = '/login/';
 			return Promise.reject(error);

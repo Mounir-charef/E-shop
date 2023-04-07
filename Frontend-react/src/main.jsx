@@ -12,6 +12,7 @@ import Register from "./routes/Register.jsx";
 import Logout from "./routes/Logout.jsx";
 import './index.css'
 import {AuthContextProvider} from "./AuthContext.jsx";
+import {useNavigate} from "react-router-dom";
 
 const App = () => {
     return (

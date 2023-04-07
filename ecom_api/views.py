@@ -1,11 +1,12 @@
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from django_filters.rest_framework import DjangoFilterBackend
+# from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 from .models import Category, Product, Cart, Order
 from .serializers import CategorySerializer, ProductSerializer, CartSerializer, OrderSerializer
 from .permissions import IsOwnerOrReadOnly
 from .paginations import CustomCursorPagination
-from .filters import ProductFilter
+# from .filters import ProductFilter
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
@@ -13,9 +14,11 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = ProductSerializer
     permission_classes = [AllowAny]
     pagination_class = CustomCursorPagination
-    filter_backends = [DjangoFilterBackend]
-    filterset_class = ProductFilter
-    search_fields = ['name']
+    filter_backends = [SearchFilter]
+    search_fields = ['name', 'category__name']
+    # filter_backends = [DjangoFilterBackend]
+    # filterset_class = ProductFilter
+    # search_fields = ['name']
 
     def get_queryset(self):
         queryset = self.queryset

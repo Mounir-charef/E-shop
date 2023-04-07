@@ -1,7 +1,7 @@
 # from rest_framework import generics
 # from django.shortcuts import get_object_or_404
 # from rest_framework.response import Response
-# from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from blog.models import Post
 from blog.permissions import PostUserWritePermission
@@ -17,7 +17,7 @@ class PostViewSet(viewsets.ModelViewSet):
     """
     serializer_class = PostSerializer
     pagination_class = pagination.OptimizedPagination
-    permission_classes = [PostUserWritePermission]
+    permission_classes = [IsAuthenticated]
     queryset = Post.objects.all()
     filter_backends = [SearchFilter]
     search_fields = ['title', 'slug', 'author__user_name']

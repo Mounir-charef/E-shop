@@ -30,6 +30,7 @@ const login = () => {
                 if(res.status === 200){
                     setToken(res.data.access);
                     localStorage.setItem("refresh_token", res.data.refresh);
+                    axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
                     navigate("/", {replace: true});
                 }else{
                     alert("error while logging in, please try again!!");

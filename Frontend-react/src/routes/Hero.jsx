@@ -3,65 +3,71 @@ import axiosInstance from '../axios';
 import Posts from "../components/Posts.jsx";
 import PostLoading from "../components/PostLoading.jsx";
 import AuthContext from "../AuthContext.jsx";
+import { useNavigate } from "react-router-dom";
 const Hero = () => {
+    const navigate = useNavigate();
     const PostLoadingComponent = PostLoading(Posts);
     const [appState, setAppState] = useState({
         loading: true,
-        posts: null
-    }),
-         [next, setNext] = useState(null),
-         [previous, setPrevious] = useState(null);
+        posts: null,
+        next: null,
+        previous: null
+    });
+
+    const search = new URLSearchParams(window.location.search).get('search') || null;
+    const data = useState({search: ''}) ;
 
     const {name} = useContext(AuthContext);
 
-    const getNextPage = async () => {
-        const cursor = next ? (new URL(next)).searchParams.get("cursor") : null;
-        axiosInstance.get('', {
-            params: {
-                cursor: cursor
-            }
-        }).then((res) => {
-            const data = res.data;
-            setAppState({ loading: false, posts: data.results});
-            setNext(data.next);
-            setPrevious(data.previous);
-        });
+    const goSearch = (e) => {
+        e.preventDefault();
+        if(data.search){
+            navigate("/?search=" + data.search);
+        }
+        else{
+            navigate("/");
+        }
+        window.location.reload();
     }
-    const getPreviousPage = async () => {
-        const cursor = previous ? (new URL(previous)).searchParams.get("cursor") : null;
-        axiosInstance.get('', {
-            params: {
-                page: cursor
-            }
-        }).then((res) => {
+
+    const getNextPage = async (e) => {
+        const url = e.target.name === "next" ? appState.next : appState.previous;
+        axiosInstance.get(url).then((res) => {
             const data = res.data;
-            setAppState({ loading: false, posts: data.results});
-            setNext(data.next);
-            setPrevious(data.previous);
+            setAppState({ loading: false, posts: data.results, next: data.next, previous: data.previous});
         });
     }
 
     useEffect(() => {
-        axiosInstance.get('').then((res) => {
+        axiosInstance.get('http://localhost:8000/api/ecom/products/',{
+            params: {
+                search: search
+            }
+        }).then((res) => {
                 const data = res.data;
-                setAppState({ loading: false, posts: data.results});
-                setNext(data.next);
-                setPrevious(data.previous);
+                console.log(data.next);
+                setAppState({ loading: false, posts: data.results, next: data.next, previous: data.previous});
+        }).catch((err) => {
+            console.log(err);
         });
     }, []);
     return (
         <div>
-            <p>hello bois i believe u logged in lemmi check</p>
+            <p>hello bois i believe u logged in lemmi check {name}</p>
 			<hr/>
-            {localStorage.getItem('access_token') ? (
-                            <p>you are logged in {name}</p>
-                        ) : (
-                            <p>you are not logged in {name}</p>
-                        )}
+            <form onSubmit={goSearch}>
+                <input
+                type="text"
+                placeholder="Search"
+                onChange={(e) => {
+                    data.search = e.target.value;
+                }}
+            />
+            </form>
 			<hr/>
             <PostLoadingComponent isLoading={appState.loading} posts={appState.posts} />
-            {previous && <button onClick={getPreviousPage}>Previous</button>}
-            {next && <button onClick={getNextPage}>Next</button>}
+            {appState.previous && <button name='previous' onClick={getNextPage}>Previous</button>}
+            {appState.next && <button name='next' onClick={getNextPage}>Next</button>}
         </div>
     );
 };
