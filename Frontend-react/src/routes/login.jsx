@@ -22,7 +22,7 @@ const login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axiosInstance
-            .post(`token/`, {
+            .post(`http://localhost:8000/api/token/`, {
                 email: formData.email,
                 password: formData.password,
             })

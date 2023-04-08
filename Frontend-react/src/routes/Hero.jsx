@@ -1,23 +1,16 @@
-import { useEffect, useState, useContext} from 'react';
-import axiosInstance from '../axios';
+import {useState, useContext} from 'react';
 import Posts from "../components/Posts.jsx";
 import PostLoading from "../components/PostLoading.jsx";
 import AuthContext from "../AuthContext.jsx";
 import { useNavigate } from "react-router-dom";
+import useFetchData from "../hooks/useFetchData.jsx";
 const Hero = () => {
-    const navigate = useNavigate();
-    const PostLoadingComponent = PostLoading(Posts);
-    const [appState, setAppState] = useState({
-        loading: true,
-        posts: null,
-        next: null,
-        previous: null
-    });
+    const navigate = useNavigate(),
+     PostLoadingComponent = PostLoading(Posts),
+     data = useState({search: ''}) ,
+     {name} = useContext(AuthContext);
 
-    const search = new URLSearchParams(window.location.search).get('search') || null;
-    const data = useState({search: ''}) ;
-
-    const {name} = useContext(AuthContext);
+    const [appState, getNextPage] = useFetchData('http://localhost:8000/api/ecom/products/');
 
     const goSearch = (e) => {
         e.preventDefault();
@@ -29,28 +22,6 @@ const Hero = () => {
         }
         window.location.reload();
     }
-
-    const getNextPage = async (e) => {
-        const url = e.target.name === "next" ? appState.next : appState.previous;
-        axiosInstance.get(url).then((res) => {
-            const data = res.data;
-            setAppState({ loading: false, posts: data.results, next: data.next, previous: data.previous});
-        });
-    }
-
-    useEffect(() => {
-        axiosInstance.get('http://localhost:8000/api/ecom/products/',{
-            params: {
-                search: search
-            }
-        }).then((res) => {
-                const data = res.data;
-                console.log(data.next);
-                setAppState({ loading: false, posts: data.results, next: data.next, previous: data.previous});
-        }).catch((err) => {
-            console.log(err);
-        });
-    }, []);
     return (
         <div>
             <p>hello bois i believe u logged in lemmi check {name}</p>
