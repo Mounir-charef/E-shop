@@ -10,7 +10,7 @@ const Hero = () => {
      data = useState({search: ''}) ,
      {name} = useContext(AuthContext);
 
-    const [appState, getNextPage] = useFetchData('http://localhost:8000/api/ecom/products/');
+    const [appState, getNextPage, search] = useFetchData('http://localhost:8000/api/ecom/products/');
 
     const goSearch = (e) => {
         e.preventDefault();
@@ -30,6 +30,7 @@ const Hero = () => {
                 <input
                 type="text"
                 placeholder="Search"
+                defaultValue={search}
                 onChange={(e) => {
                     data.search = e.target.value;
                 }}

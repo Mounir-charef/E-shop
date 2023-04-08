@@ -31,7 +31,7 @@ const useFetchData = ({url}) => {
     }, []);
 
 
-    return [appState, getNextPage];
+    return [appState, getNextPage, search];
 };
 
 export default useFetchData;

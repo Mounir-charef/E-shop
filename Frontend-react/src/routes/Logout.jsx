@@ -8,7 +8,7 @@ export default function Logout() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		axiosInstance.post('user/blacklist/', {
+		axiosInstance.post('http://localhost:8000/api/user/blacklist/', {
 			refresh_token: localStorage.getItem('refresh_token'),
 		}).catch((error) => console.log(error));
 		setToken(null);

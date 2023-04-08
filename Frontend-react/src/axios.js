@@ -1,6 +1,8 @@
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 
+const baseURL = 'http://localhost:8000/api/';
+
 
 const axiosInstance = axios.create({
 	timeout: 5000,

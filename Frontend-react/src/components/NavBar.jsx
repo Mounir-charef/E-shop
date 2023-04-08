@@ -1,7 +1,6 @@
 const NavBar = ({children}) => {
     return (
-        <div>
-            <h1 className='underline uppercase'>NavBar</h1>
+        <div className='flex items-center justify-around'>
             {children}
         </div>
     )
