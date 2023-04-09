@@ -24,19 +24,6 @@ const Hero = () => {
     }
     return (
         <div>
-            <p>hello bois i believe u logged in lemmi check {name}</p>
-			<hr/>
-            <form onSubmit={goSearch}>
-                <input
-                type="text"
-                placeholder="Search"
-                defaultValue={search}
-                onChange={(e) => {
-                    data.search = e.target.value;
-                }}
-            />
-            </form>
-			<hr/>
             <PostLoadingComponent isLoading={appState.loading} posts={appState.posts} />
             {appState.previous && <button name='previous' onClick={getNextPage}>Previous</button>}
             {appState.next && <button name='next' onClick={getNextPage}>Next</button>}

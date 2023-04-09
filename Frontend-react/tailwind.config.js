@@ -23,8 +23,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        'Permanent': ['Permanent Marker', 'cursive'],
-        'Pacifico': ['Pacifico', 'cursive'],
+        'Stylish': ['Stylish', 'sans-serif'],
       }
     },
   },
