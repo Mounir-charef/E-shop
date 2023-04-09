@@ -11,3 +11,11 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
 
         # Write permissions are only allowed to the owner of the product
         return obj.user == request.user
+
+
+class IsOwnerRead(permissions.BasePermission):
+    message = "Only owner of object can access it"
+
+    def has_object_permission(self, request, view, obj):
+        return obj.user == request.user
+

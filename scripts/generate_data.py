@@ -46,7 +46,7 @@ class OrderFactory(factory.django.DjangoModelFactory):
         model = Order
 
     user = factory.SubFactory(UserFactory)
-    total_amount = Faker('random_int', min=1, max=1000)
+    quantity = Faker('random_int', min=1, max=1000)
 
 
 def run():

@@ -16,17 +16,15 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ['id', 'user', 'product', 'quantity', 'created_at', 'updated_at']
+
+
 class CartSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(many=True)
+    orders = OrderSerializer(many=True)
 
     class Meta:
         model = Cart
-        fields = ['id', 'user', 'products', 'created_at', 'updated_at']
-
-
-class OrderSerializer(serializers.ModelSerializer):
-    products = ProductSerializer(many=True)
-
-    class Meta:
-        model = Order
-        fields = ['id', 'user', 'products', 'total_amount', 'created_at', 'updated_at']
+        fields = ['id', 'user', 'orders', 'created_at', 'updated_at']

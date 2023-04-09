@@ -5,10 +5,10 @@ from django.contrib.auth.admin import UserAdmin
 
 class UserAdminConfig(UserAdmin):
     model = User
-    search_fields = ('email', 'user_name', 'first_name',)
+    search_fields = ('=id', 'email', 'user_name', 'first_name',)
     list_filter = ('email', 'user_name', 'first_name', 'is_active', 'is_staff')
     ordering = ('-date_joined',)
-    list_display = ('email', 'user_name', 'first_name',
+    list_display = ('id', 'email', 'user_name', 'first_name',
                     'image_url', 'is_active', 'is_staff')
     fieldsets = (
         (None, {'fields': ('email', 'password', 'user_name', 'first_name', 'image_url')}),

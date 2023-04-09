@@ -6,7 +6,7 @@ app_name = 'ecom_api'
 router = DefaultRouter()
 router.register(r'products', ProductViewSet)
 router.register(r'categories', CategoryViewSet)
-router.register(r'carts', CartViewSet, basename='cart')
-router.register(r'orders', OrderViewSet, basename='order')
+router.register(r'cart', CartViewSet, basename='cart')
+router.register(r'order', OrderViewSet, basename='order')
 
 urlpatterns = router.urls

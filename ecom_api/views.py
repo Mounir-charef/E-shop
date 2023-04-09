@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.filters import SearchFilter
 from .models import Category, Product, Cart, Order
 from .serializers import CategorySerializer, ProductSerializer, CartSerializer, OrderSerializer
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly, IsOwnerRead
 from .paginations import CustomCursorPagination
 # from .filters import ProductFilter
 
@@ -40,16 +40,12 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
         return Category.objects.none()
 
 
-class CartViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
-    pagination_class = CustomCursorPagination
+class CartViewSet(viewsets.ReadOnlyModelViewSet):
+    permission_classes = [IsAuthenticated, IsOwnerRead]
     serializer_class = CartSerializer
 
     def get_queryset(self):
         return Cart.objects.filter(user=self.request.user)
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
 
 
 class OrderViewSet(viewsets.ModelViewSet):
@@ -62,3 +58,6 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+        cart = Cart.objects.get_or_create(user=self.request.user)[0]
+        cart.orders.add(serializer.instance)
+
