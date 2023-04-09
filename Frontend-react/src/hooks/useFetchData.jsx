@@ -1,8 +1,10 @@
 import { useEffect, useState} from 'react';
 import axiosInstance from '../axios';
-const useFetchData = ({url}) => {
+const useFetchData = (url) => {
+    console.log(url);
     const [appState, setAppState] = useState({
         loading: true,
+        error: false,
         posts: null,
         next: null,
         previous: null
@@ -13,25 +15,34 @@ const useFetchData = ({url}) => {
         const url = e.target.name === "next" ? appState.next : appState.previous;
         axiosInstance.get(url).then((res) => {
             const data = res.data;
-            setAppState({ loading: false, posts: data.results, next: data.next, previous: data.previous});
+            setAppState({ loading: false, error: false, posts: data.results, next: data.next, previous: data.previous});
+        }).catch(() => {
+            setAppState({ loading: false, error: true, posts: null, next: null, previous: null});
         });
     }
 
-    useEffect(() => {
-        axiosInstance.get('http://localhost:8000/api/ecom/products/',{
+    const getInitialPage = async () => {
+        setAppState({ loading: true, error: false, posts: null, next: null, previous: null})
+        axiosInstance.get(url,{
             params: {
                 search: search
             }
         }).then((res) => {
                 const data = res.data;
-                setAppState({ loading: false, posts: data.results, next: data.next, previous: data.previous});
-        }).catch((err) => {
-            console.log(err);
+                setAppState({ loading: false, error: false, posts: data.results, next: data.next, previous: data.previous});
+        }).catch(() => {
+            setAppState({ loading: false, error: true, posts: null, next: null, previous: null});
+        });
+    }
+
+    useEffect(() => {
+        getInitialPage().then(() => {
+            console.log("Initial page loaded");
         });
     }, []);
 
 
-    return [appState, getNextPage, search];
+    return [appState, getNextPage, search, getInitialPage];
 };
 
 export default useFetchData;

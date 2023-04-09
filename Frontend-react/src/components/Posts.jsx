@@ -1,6 +1,5 @@
-// a React component that renders a list of posts and every post is a square card with tailwind
-
 const posts = ({ posts }) => {
+    if(!posts.length) return <h1 className="text-2xl text-center">No posts found</h1>
     return (
         <div className="grid grid-cols-3 gap-4 h-[calc(100vh-5rem)]">
             {posts.map((post) => (
