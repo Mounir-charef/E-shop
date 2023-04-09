@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
+    ".Frontend-react/src/**/*.{js,jsx,ts,tsx}",
       "./index.html",
   ],
   theme: {
@@ -21,12 +21,7 @@ module.exports = {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
-    extend: {
-      fontFamily: {
-        'Permanent': ['Permanent Marker', 'cursive'],
-        'Pacifico': ['Pacifico', 'cursive'],
-      }
-    },
+    extend: {},
   },
   plugins: [],
 }

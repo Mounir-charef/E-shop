@@ -10,6 +10,7 @@ import Hero from "./routes/Hero.jsx";
 import Login from "./routes/Login.jsx";
 import Register from "./routes/Register.jsx";
 import Logout from "./routes/Logout.jsx";
+import Profile from "./routes/Profile.jsx";
 import './index.css'
 import {AuthContextProvider} from "./AuthContext.jsx";
 
@@ -25,6 +26,7 @@ const App = () => {
 
 const routes = [
         { path: '/', element: <Hero />, index: true},
+        { path: '/profile', element: <Profile />},
     ]
 
 const router = createBrowserRouter([{element: <App />, children: routes},{ path: '/login', element: <Login /> },{ path: '/logout', element: <Logout /> },{ path: '/register', element: <Register />},])

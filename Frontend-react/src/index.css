@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .nav-item {
+        @apply no-underline cursor-pointer text-4xl text-white hover:text-sky-400 transition;
+    }
+    .title {
+        @apply text-4xl text-sky-400/100 font-Pacifico;
+    }
+}
