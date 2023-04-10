@@ -26,7 +26,7 @@ const Header = () => {
 
     return (
         <nav className='bg-gray-900 h-20 font-[1.2] sticky w-full top-0 z-10'>
-            <div className='flex px-12 justify-between items-center h-full'>
+            <div className='flex px-4 md:px-12 justify-between items-center h-full'>
                 <Link className='title nav-item flex gap-1 ' to="/">
                     E-Shop <FaShopify/>
                 </Link>

@@ -4,10 +4,10 @@
 
 @layer components {
     .nav-item {
-        @apply no-underline cursor-pointer text-4xl text-white hover:text-sky-400 transition;
+        @apply no-underline cursor-pointer text-2xl lg:text-4xl text-white hover:text-sky-400 transition;
     }
     .title {
-        @apply text-5xl text-sky-400/100 font-Stylish;
+        @apply text-3xl lg:text-5xl text-sky-400/100 font-Stylish whitespace-nowrap;
     }
     .active-btn {
         @apply bg-sky-700 text-white px-4 py-2  font-semibold hover:bg-transparent border border-sky-700 hover:text-sky-700 transition;
@@ -23,7 +23,7 @@
     }
     .card-wrap::after {
       content: attr(data-category);
-      @apply absolute top-0 py-1 px-2 max-w-[calc(100%-60px)] text-xs font-bold text-white bg-blue-500 box-border z-20 transition;
+      @apply absolute top-0 py-1 px-2 max-w-[calc(100%-60px)] text-xs font-bold text-white bg-blue-500 box-border z-auto transition;
     }
 }
 
