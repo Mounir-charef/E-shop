@@ -31,7 +31,7 @@ const useFetchData = (url) => {
                 const data = res.data;
                 setAppState({ loading: false, error: false, posts: data.results, next: data.next, previous: data.previous});
         }).catch(() => {
-            // setAppState({ loading: false, error: true, posts: null, next: null, previous: null});
+            setAppState({ loading: false, error: true, posts: null, next: null, previous: null});
         });
     }
 

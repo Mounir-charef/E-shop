@@ -18,4 +18,7 @@
     .skeleton {
         @apply h-64 w-full absolute inset-0;
     }
+    .add-btn {
+        @apply bg-sky-700 text-white px-4 py-2 rounded font-semibold hover:bg-transparent border border-sky-700 hover:text-sky-700 transition;
+    }
 }
