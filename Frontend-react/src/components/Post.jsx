@@ -36,11 +36,11 @@ const Post = ({post}) => {
                 </div>
               )}
         <li className="flex flex-col gap-2 rounded p-6 border shadow justify-between ">
-                <figure className='relative' aria-label={post.categoty_name}>
+                <figure className='card-wrap groupe relative' data-category={post.category_name}>
                     <img
                         src={post.image}
                         alt={post.name}
-                        className="w-full h-64 object-cover rounded hover:opacity-75 transition cursor-pointer hover:scale-105"
+                        className="w-full h-64 object-cover rounded hover:opacity-95 transition cursor-pointer hover:scale-105"
                         loading='lazy'
                         onLoad={() => setLoaded(true)}
                     />
