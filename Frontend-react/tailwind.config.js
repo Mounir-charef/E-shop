@@ -25,7 +25,22 @@ module.exports = {
       fontFamily: {
         'Stylish': ['Stylish', 'sans-serif'],
         "Pacifico": ["Pacifico", "cursive"],
-      }
+      },
+      keyframes: {
+        'fade-in-down': {
+            '0%, 100%': {
+                opacity: '0',
+                transform: 'translateY(-10px)'
+            },
+            '50%': {
+                opacity: '1',
+                transform: 'translateY(30%)'
+            },
+        }
+      },
+        animation: {
+            'fade-in-down': 'fade-in-down 4s ease-in-out',
+        }
     },
   },
   plugins: [

@@ -2,12 +2,14 @@ import {useState, useRef} from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import {AiOutlineCiCircle} from "react-icons/ai";
+import {useMessage} from "../hooks/useMessage.jsx";
 import axiosInstance from "../axios.js";
 
 const Post = ({post}) => {
     const [loaded, setLoaded] = useState(false);
     const [ordering, setOrdering] = useState(false);
     const inputRef = useRef(null);
+    const {message, showMessage } = useMessage(4000);
 
     const handleAddToCart = () => {
         setOrdering(true);
@@ -15,11 +17,11 @@ const Post = ({post}) => {
             product: post.id,
             quantity: inputRef.current.value
         }).then(res => {
-            alert('Added to cart');
+            showMessage('Added to cart');
             console.log(res.data);
         }
         ).catch(err => {
-            alert('Something went wrong');
+            showMessage('Something went wrong');
             console.log(err);
         }).finally(() => {
             setOrdering(false);
@@ -27,6 +29,12 @@ const Post = ({post}) => {
     }
 
     return (
+        <>
+            {message && (
+                <div className="z-20 w-fit top-0 left-1/2 bg-green-500 text-white px-4 py-2 rounded-md fixed animate-fade-in-down">
+                  {message}
+                </div>
+              )}
         <li className="flex flex-col gap-2 rounded p-6 border shadow justify-between ">
                 <figure className='relative' aria-label={post.categoty_name}>
                     <img
@@ -77,6 +85,7 @@ const Post = ({post}) => {
                     </button>
                 </div>
         </li>
+        </>
     );
 };
 

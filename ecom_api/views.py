@@ -61,3 +61,18 @@ class OrderViewSet(viewsets.ModelViewSet):
         cart = Cart.objects.get_or_create(user=self.request.user)[0]
         cart.orders.add(serializer.instance)
 
+    def perform_destroy(self, instance):
+        cart = Cart.objects.get_or_create(user=self.request.user)[0]
+        cart.orders.remove(instance)
+        instance.delete()
+
+    def perform_update(self, serializer):
+        serializer.save(user=self.request.user)
+        cart = Cart.objects.get_or_create(user=self.request.user)[0]
+        cart.orders.add(serializer.instance)
+
+    def perform_partial_update(self, serializer):
+        serializer.save(user=self.request.user)
+        cart = Cart.objects.get_or_create(user=self.request.user)[0]
+        cart.orders.add(serializer.instance)
+
