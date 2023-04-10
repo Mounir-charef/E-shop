@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 
 export const useMessage = (duration) => {
-  const [message, setMessage] = useState(null);
+  const defaultMsg = {
+    text: null,
+    type: null,
+  }
+  const [message, setMessage] = useState(defaultMsg);
 
   const showMessage = (msg) => {
     setMessage(msg);
     setTimeout(() => {
-      setMessage(null);
+      setMessage(defaultMsg);
     }, duration);
   };
 

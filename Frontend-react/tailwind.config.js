@@ -30,11 +30,11 @@ module.exports = {
         'fade-in-down': {
             '0%, 100%': {
                 opacity: '0',
-                transform: 'translateY(-10px)'
+                translate : '-50% -10px'
             },
             '50%': {
                 opacity: '1',
-                transform: 'translateY(30%)'
+                translate : '-50% 50%'
             },
         }
       },

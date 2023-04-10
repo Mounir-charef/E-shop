@@ -17,11 +17,11 @@ const Post = ({post}) => {
             product: post.id,
             quantity: inputRef.current.value
         }).then(res => {
-            showMessage('Added to cart');
+            showMessage({text: `${inputRef.current.value} of ${post.name} Added to cart`, type: 'success'});
             console.log(res.data);
         }
         ).catch(err => {
-            showMessage('Something went wrong');
+            showMessage({text: 'Something went wrong', type: 'error'});
             console.log(err);
         }).finally(() => {
             setOrdering(false);
@@ -30,9 +30,9 @@ const Post = ({post}) => {
 
     return (
         <>
-            {message && (
-                <div className="z-20 w-fit top-0 left-1/2 bg-green-500 text-white px-4 py-2 rounded-md fixed animate-fade-in-down">
-                  {message}
+            {message.text && (
+                <div className={`z-20 w-fit top-0 left-1/2 ${message.type === 'success' ? 'bg-sky-500' : 'bg-red-500'} text-white px-4 py-2 rounded-md fixed animate-fade-in-down`}>
+                  {message.text}
                 </div>
               )}
         <li className="flex flex-col gap-2 rounded p-6 border shadow justify-between ">
