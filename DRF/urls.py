@@ -12,7 +12,7 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('blog.urls', namespace='blog')),
+    path('', include('ecom.urls', namespace='ecom')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/user/', include('user.urls', namespace='user')),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
@@ -29,7 +29,9 @@ urlpatterns = [
         description="API for all things …",
     ), name='docs'),
     # path('swagger-docs/', get_swagger_view(title='My API'), name='swagger-docs'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) +\
+    static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) +\
+#                    static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
