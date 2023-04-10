@@ -1,11 +1,13 @@
-import {useState, useRef} from 'react';
+import {useState, useRef, useContext} from 'react';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import {AiOutlineCiCircle} from "react-icons/ai";
 import {useMessage} from "../hooks/useMessage.jsx";
+import AuthContext from "../AuthContext.jsx";
 import axiosInstance from "../axios.js";
 
 const Post = ({post}) => {
+    const {baseUrl} = useContext(AuthContext);
     const [loaded, setLoaded] = useState(false);
     const [ordering, setOrdering] = useState(false);
     const inputRef = useRef(null);
@@ -13,7 +15,7 @@ const Post = ({post}) => {
 
     const handleAddToCart = () => {
         setOrdering(true);
-        axiosInstance.post('http://127.0.0.1:8000/api/ecom/order/', {
+        axiosInstance.post(baseUrl +'api/ecom/order/', {
             product: post.id,
             quantity: inputRef.current.value
         }).then(res => {

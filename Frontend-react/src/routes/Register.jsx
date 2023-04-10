@@ -1,8 +1,10 @@
 import axiosInstance from "../axios.js";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import AuthContext from "../AuthContext.jsx";
 
 const Register = () => {
+    const {baseUrl} = useContext(AuthContext)
     const navigate = useNavigate();
     const initialFormData = Object.freeze({
         username: "",
@@ -22,7 +24,7 @@ const Register = () => {
         e.preventDefault();
         console.log(formData);
         axiosInstance
-            .post(`user/create/`, {
+            .post(`${baseUrl}/user/create/`, {
                 user_name: formData.username,
                 email: formData.email,
                 password: formData.password,

@@ -21,6 +21,27 @@
     .add-btn {
         @apply bg-sky-700 text-white px-4 py-2 rounded font-semibold hover:bg-transparent border border-sky-700 hover:text-sky-700 transition;
     }
+
+    .form-wrap {
+        @apply flex flex-col items-center justify-center gap-8 p-8 h-2/3 w-3/4 md:aspect-square md:w-auto bg-white rounded-lg shadow-lg;
+    }
+
+    .form-box {
+        @apply w-3/4;
+    }
+
+    .form-content {
+        @apply flex flex-col items-center justify-center gap-4;
+    }
+
+    .form-item {
+        @apply w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-sky-700 transition;
+    }
+
+    .form-submit-btn {
+        @apply bg-sky-700 text-white px-4 py-2 rounded font-semibold hover:bg-transparent border border-sky-700 hover:text-sky-700 transition;
+    }
+
     .card-wrap::after {
       content: attr(data-category);
       @apply absolute top-0 py-1 px-2 max-w-[calc(100%-60px)] text-xs font-bold text-white bg-blue-500 box-border z-auto transition;

@@ -1,6 +1,5 @@
 import {createContext, useState, useEffect} from "react";
 import jwt_decode from "jwt-decode";
-import axiosInstance from "./axios.js";
 
 const AuthContext = createContext(null);
 
@@ -10,6 +9,9 @@ export const AuthContextProvider = ({children}) => {
 
     const [username, setUsername] = useState(localStorage.getItem('username'));
     const [token, setToken] = useState(localStorage.getItem('access_token'));
+    const [debug, setDebug] = useState(true);
+
+    const baseUrl = debug ? 'http://127.0.0.1:8000/' : window.location.origin+'/';
 
     useEffect(() => {
         if (token) {
@@ -27,6 +29,7 @@ export const AuthContextProvider = ({children}) => {
 
     return (
         <AuthContext.Provider value={{
+            baseUrl: baseUrl,
             name: username,
             token:token,
             setToken: setToken,

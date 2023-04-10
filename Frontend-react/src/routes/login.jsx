@@ -1,10 +1,11 @@
 import axiosInstance from "../axios";
 import {useState, useContext} from "react";
 import AuthContext from "../AuthContext.jsx";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import LoginForm from "../components/LoginForm.jsx";
 
 const login = () => {
-    const {setToken} = useContext(AuthContext);
+    const {setToken, baseUrl} = useContext(AuthContext);
     const navigate = useNavigate();
     const initialFormData = Object.freeze({
         email: "",
@@ -22,7 +23,7 @@ const login = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         axiosInstance
-            .post(`http://localhost:8000/api/token/`, {
+            .post(`${baseUrl}api/token/`, {
                 email: formData.email,
                 password: formData.password,
             })
@@ -40,37 +41,17 @@ const login = () => {
     }
 
     return (
-        <div className="p-5">
-            <form onSubmit={handleSubmit}>
-                <input
-                    value={formData.email}
-                    type='text'
-                    onChange={handleChange}
-                    autoComplete='email'
-                    name='email'
-                    placeholder='Email'
-                    id='email'
-                    required
-                    className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
+        <div className="flex justify-center items-center
+        bg-gradient-to-bl from-[#afd9d8] to-sky-100 h-screen overflow-hidden ">
+            <div className="form-wrap">
+                <h1 className="text-3xl font-bold text-center mb-4 font-Pacifico">Login</h1>
+                <LoginForm
+                    handleSubmit={handleSubmit}
+                    handleChange={handleChange}
+                    formData={formData}
                 />
-                <input type="password"
-                            value={formData.password}
-                            onChange={handleChange}
-                            autoComplete='current-password'
-                            name='password'
-                            placeholder='Password'
-                            id='password'
-                            required
-                            className='w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500'
-                />
-                <button
-                    onClick={handleSubmit}
-                    type='submit'
-                    className='w-full p-2 mt-2 text-white bg-blue-500 rounded-md focus:outline-none focus:bg-blue-600 hover:bg-blue-600'
-                >
-                    Register
-                </button>
-            </form>
+                <span className="text-center block mt-4">Don't have an account? <Link to="/register" className="text-blue-500 hover:text-sky-700 transition">Register</Link></span>
+            </div>
         </div>
     );
 };
