@@ -4,10 +4,11 @@ from .models import *
 
 class ProductSerializer(serializers.ModelSerializer):
     status = serializers.ChoiceField(choices=[])
+    category_name = serializers.CharField(source='category.name', read_only=True)
 
     class Meta:
         model = Product
-        fields = ['id', 'name', 'description', 'category', 'price', 'image', 'status']
+        fields = ['id', 'name', 'description', 'category', 'category_name', 'price', 'image', 'status']
 
 
 class CategorySerializer(serializers.ModelSerializer):

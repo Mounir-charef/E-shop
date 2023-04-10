@@ -1,19 +1,20 @@
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import {Rings} from "react-loader-spinner";
 function PostLoading(Component) {
 	return function PostLoadingComponent({ isLoading, ...props }) {
 		if (!isLoading) return <Component {...props} />;
 		return (
-			<Skeleton count={10} className='w-24' height={120} wrapper={Box}  inline={true}
-					  containerClassName='flex gap-5 flex-wrap p-10' />
+			<div className="h-96 flex justify-center items-center">
+					<Rings
+					  height="100"
+					  width="100"
+					  color="#38bdf8"
+					  radius="6"
+					  visible={true}
+					  ariaLabel="rings-loading"
+					/>
+			</div>
+
 		);
 	};
 }
 export default PostLoading;
-
-
-const Box = ({ children }) => (
-	  <div className='border p-2 aspect-square'>
-		{children}
-	  </div>
-)

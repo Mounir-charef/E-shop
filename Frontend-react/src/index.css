@@ -9,4 +9,13 @@
     .title {
         @apply text-5xl text-sky-400/100 font-Stylish;
     }
+    .active-btn {
+        @apply bg-sky-700 text-white px-4 py-2  font-semibold hover:bg-transparent border border-sky-700 hover:text-sky-700 transition;
+    }
+    .disabled-btn {
+        @apply bg-sky-700 text-white px-4 py-2  font-semibold hover:bg-transparent border border-sky-700 hover:text-sky-700 transition opacity-50 cursor-not-allowed;
+    }
+    .skeleton {
+        @apply h-64 w-full absolute inset-0;
+    }
 }

@@ -1,7 +1,6 @@
 import { useEffect, useState} from 'react';
 import axiosInstance from '../axios';
 const useFetchData = (url) => {
-    console.log(url);
     const [appState, setAppState] = useState({
         loading: true,
         error: false,
@@ -22,6 +21,7 @@ const useFetchData = (url) => {
     }
 
     const getInitialPage = async () => {
+        console.log("Loading initial page");
         setAppState({ loading: true, error: false, posts: null, next: null, previous: null})
         axiosInstance.get(url,{
             params: {
@@ -31,7 +31,7 @@ const useFetchData = (url) => {
                 const data = res.data;
                 setAppState({ loading: false, error: false, posts: data.results, next: data.next, previous: data.previous});
         }).catch(() => {
-            setAppState({ loading: false, error: true, posts: null, next: null, previous: null});
+            // setAppState({ loading: false, error: true, posts: null, next: null, previous: null});
         });
     }
 
