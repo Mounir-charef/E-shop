@@ -28,8 +28,9 @@ class CustomAccountManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
-    user_name = models.CharField(max_length=150, unique=True)
+    user_name = models.CharField(max_length=150, unique=False)
     first_name = models.CharField(max_length=150, blank=True)
+    balance = models.IntegerField(default=50000)
     about = models.TextField(_('about'), max_length=500, blank=True)
     image_url = models.URLField(_('image url'), max_length=200, blank=True,
                                 default='https://robohash.org/hicveldicta.png?size=50x50&set=set1')

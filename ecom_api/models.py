@@ -17,7 +17,7 @@ class IntegerRangeField(models.IntegerField):
 
 
 class Category(models.Model):
-    name = models.CharField(_("name"), max_length=100)
+    name = models.CharField(_("name"), max_length=100, null=False, blank=False)
 
     def __str__(self):
         return self.name
@@ -30,11 +30,11 @@ class Product(models.Model):
         ('discontinued', _('Discontinued')),
     ]
 
-    name = models.CharField(_("name"), max_length=100)
-    description = models.TextField(_("description"))
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_("category"))
-    price = models.DecimalField(_("price"), max_digits=8, decimal_places=2)
-    image = models.URLField(_("image"), max_length=200)
+    name = models.CharField(_("name"), max_length=100, null=False, blank=False)
+    description = models.TextField(_("description"), max_length=500)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_("category"), null=False, blank=False)
+    price = models.DecimalField(_("price"), max_digits=8, decimal_places=2, null=False, blank=False)
+    image = models.URLField(_("image"), max_length=200, null=True, blank=True)
     status = models.CharField(_("status"), max_length=20, choices=STATUS_CHOICES, default='available')
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("updated at"), auto_now=True)
@@ -56,8 +56,8 @@ class Order(models.Model):
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    orders = models.ManyToManyField(Order, blank=True, verbose_name=_("orders"))
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("user"), null=False, blank=False)
+    orders = models.ManyToManyField(Order, blank=True, verbose_name=_("orders"), related_name="cart_orders")
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("updated at"), auto_now=True)
 

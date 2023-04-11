@@ -1,0 +1,155 @@
+info:
+  description: ''
+  title: ''
+  version: ''
+openapi: 3.0.0
+paths:
+  /api/cart/:
+    get:
+      operationId: cart_list
+      tags:
+      - cart
+  /api/cart/{id}/:
+    get:
+      operationId: cart_read
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: ''
+          title: ''
+          type: string
+      tags:
+      - cart
+  /api/categories/:
+    get:
+      operationId: categories_list
+      tags:
+      - categories
+  /api/categories/{id}/:
+    get:
+      operationId: categories_read
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this category.
+          title: ID
+          type: integer
+      tags:
+      - categories
+  /api/order/:
+    get:
+      operationId: order_list
+      parameters:
+      - in: query
+        name: cursor
+        schema:
+          description: The pagination cursor value.
+          title: Cursor
+          type: string
+      tags:
+      - order
+    post:
+      operationId: order_create
+      tags:
+      - order
+  /api/order/{id}/:
+    delete:
+      operationId: order_delete
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: ''
+          title: ''
+          type: string
+      tags:
+      - order
+    get:
+      operationId: order_read
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: ''
+          title: ''
+          type: string
+      tags:
+      - order
+    patch:
+      operationId: order_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: ''
+          title: ''
+          type: string
+      tags:
+      - order
+    put:
+      operationId: order_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: ''
+          title: ''
+          type: string
+      tags:
+      - order
+  /api/products/:
+    get:
+      operationId: products_list
+      parameters:
+      - in: query
+        name: cursor
+        schema:
+          description: The pagination cursor value.
+          title: Cursor
+          type: string
+      - in: query
+        name: search
+        schema:
+          description: A search term.
+          title: Search
+          type: string
+      tags:
+      - products
+  /api/products/{id}/:
+    get:
+      operationId: products_read
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this product.
+          title: ID
+          type: integer
+      - in: query
+        name: search
+        schema:
+          description: A search term.
+          title: Search
+          type: string
+      tags:
+      - products
+  /api/token/:
+    post:
+      description: 'Takes a set of user credentials and returns an access and refresh
+        JSON web
+
+        token pair to prove the authentication of those credentials.'
+      operationId: token_create
+      tags:
+      - token
+servers:
+- url: ''

@@ -34,6 +34,7 @@ const Header = () => {
                     {pathname === '/' &&
                         <SearchField placeHolder='Search' data={data} goSearch={goSearch} search={search}/>
                     }
+                    {/*<p className='nav-item text-2xl self-end'>{balance}$</p>*/}
                     <Link className='nav-item flex items-center' to="/profile">
                         <IoPersonOutline />
                         <p className='text-sm self-end'>{name}</p>

@@ -21,6 +21,11 @@ axiosInstance.interceptors.response.use(
 	},
 	async function (error) {
 		const originalRequest = error.config;
+
+		if (typeof error.response === 'undefined') {
+			return Promise.reject(error);
+		}
+
 		if (
 			error.response.status === 401 &&
 			(

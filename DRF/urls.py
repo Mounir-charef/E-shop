@@ -14,6 +14,9 @@ urlpatterns = [
     # React Frontend
     path('', include('ecom.urls', namespace='ecom')),
 
+    # Ecom API
+    path('api/', include('ecom_api.urls', namespace='ecom_api')),
+
     # Admin panel
     path('admin/', admin.site.urls),
 
@@ -27,19 +30,20 @@ urlpatterns = [
     # Rest Auth
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    # Ecom API
-    path('api/', include('ecom_api.urls', namespace='ecom_api')),
+
+    # Schema
+    path('open/', get_schema_view(
+        title="Ecom API",
+        description="API for the E-Shop market",
+        version="1.0.1"
+    ), name='eshop-schema'),
+
 
     # Docs
-    path('shema/', get_schema_view(
-        title="My API",
-        description="API for all things …",
-        version="1.0.0"
-    ), name='openapi-schema'),
     path('docs/', include_docs_urls(
-        title="My API",
-        description="API for all things …",
-    ), name='docs'),
+        title="Ecom API",
+        description="API for the E-Shop market",
+    ), name='eshop-docs'),
     # path('swagger-docs/', get_swagger_view(title='My API'), name='swagger-docs'),
 
     # Static files

@@ -6,10 +6,18 @@ from .models import Category, Product, Cart, Order
 from .serializers import CategorySerializer, ProductSerializer, CartSerializer, OrderSerializer
 from .permissions import IsOwnerOrReadOnly, IsOwnerRead
 from .paginations import CustomCursorPagination
+from rest_framework import serializers
 # from .filters import ProductFilter
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    list:
+    Return a list of all the existing products.
+
+    retrieve:
+    Return the given product.
+    """
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
@@ -49,6 +57,25 @@ class CartViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class OrderViewSet(viewsets.ModelViewSet):
+    """
+    list:
+    Return a list of all the existing orders.
+
+    create:
+    Create a new order instance.
+
+    retrieve:
+    Return the given order.
+
+    update:
+    Update the given order.
+
+    partial_update:
+    Update the given order.
+
+    destroy:
+    Delete the given order.
+    """
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
     pagination_class = CustomCursorPagination
     serializer_class = OrderSerializer
@@ -57,9 +84,16 @@ class OrderViewSet(viewsets.ModelViewSet):
         return Order.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-        cart = Cart.objects.get_or_create(user=self.request.user)[0]
-        cart.orders.add(serializer.instance)
+        # check if log in user has money to pay for the order
+        total_price = serializer.validated_data['product'].price * serializer.validated_data['quantity']
+        if self.request.user.balance >= total_price:
+            serializer.save(user=self.request.user)
+            cart = Cart.objects.get_or_create(user=self.request.user)[0]
+            self.request.user.balance -= total_price
+            cart.orders.add(serializer.instance)
+            self.request.user.save()
+        else:
+            raise serializers.ValidationError({'message': "You don't have enough money to pay for this order"}, code=400)
 
     def perform_destroy(self, instance):
         cart = Cart.objects.get_or_create(user=self.request.user)[0]
@@ -75,4 +109,3 @@ class OrderViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
         cart = Cart.objects.get_or_create(user=self.request.user)[0]
         cart.orders.add(serializer.instance)
-

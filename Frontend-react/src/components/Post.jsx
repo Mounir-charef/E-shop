@@ -19,12 +19,14 @@ const Post = ({post}) => {
             product: post.id,
             quantity: inputRef.current.value
         }).then(res => {
-            showMessage({text: `${inputRef.current.value} of ${post.name} Added to cart`, type: 'success'});
-            console.log(res.data);
-        }
+            showMessage({text: `${inputRef.current.value} of ${post.name} Added to cart`, type: 'success'});}
         ).catch(err => {
-            showMessage({text: 'Something went wrong', type: 'error'});
-            console.log(err);
+            if (err.response === undefined) {
+                showMessage({text: "something went wrong try again later", type: 'error'});
+            } else {
+                showMessage({text: err.response.data.message, type: 'error'});
+            }
+
         }).finally(() => {
             setOrdering(false);
         });
