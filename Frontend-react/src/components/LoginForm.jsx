@@ -28,7 +28,7 @@ const LoginForm = ({handleSubmit, formData, handleChange}) => {
                     type='submit'
                     className='form-submit-btn'
                 >
-                    Register
+                    Login
                 </button>
         </form>
         </div>

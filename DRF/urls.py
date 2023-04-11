@@ -27,11 +27,8 @@ urlpatterns = [
     # Rest Auth
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
-    # Blog API
-    path('api/', include('blog_api.urls', namespace='blog_api')),
-
     # Ecom API
-    path('api/ecom/', include('ecom_api.urls', namespace='ecom_api')),
+    path('api/', include('ecom_api.urls', namespace='ecom_api')),
 
     # Docs
     path('shema/', get_schema_view(

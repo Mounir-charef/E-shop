@@ -10,7 +10,7 @@ const Hero = () => {
     const {baseUrl, token} = useContext(AuthContext);
     if (!token) navigate('/login');
     const PostLoadingComponent = PostLoading(Posts),
-        [appState, getNextPage, search, getInitialPage] = useFetchData(baseUrl + 'api/ecom/products/');
+        [appState, getNextPage, search, getInitialPage] = useFetchData(baseUrl + 'api/products/');
     const hasPrevious = appState.previous !== null,
         hasNext = appState.next !== null;
 

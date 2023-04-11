@@ -15,7 +15,7 @@ const Post = ({post}) => {
 
     const handleAddToCart = () => {
         setOrdering(true);
-        axiosInstance.post(baseUrl +'api/ecom/order/', {
+        axiosInstance.post(baseUrl +'api/order/', {
             product: post.id,
             quantity: inputRef.current.value
         }).then(res => {
