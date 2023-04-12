@@ -1,5 +1,5 @@
 import {Rings} from "react-loader-spinner";
-function PostLoading(Component) {
+function ComponentLoading(Component) {
 	return function PostLoadingComponent({ isLoading, ...props }) {
 		if (!isLoading) return <Component {...props} />;
 		return (
@@ -17,4 +17,4 @@ function PostLoading(Component) {
 		);
 	};
 }
-export default PostLoading;
+export default ComponentLoading;

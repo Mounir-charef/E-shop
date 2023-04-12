@@ -6,6 +6,18 @@ from .serializers import RegisterUserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
+class RetrieveUserView(APIView):
+    permission_classes = (AllowAny,)
+
+    @staticmethod
+    def get(request):
+        try:
+            user_data = RegisterUserSerializer(request.user).data
+            return Response(user_data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': e}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 class CustomUserCreate(APIView):
     permission_classes = (AllowAny,)
 

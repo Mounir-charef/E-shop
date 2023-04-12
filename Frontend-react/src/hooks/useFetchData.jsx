@@ -21,7 +21,6 @@ const useFetchData = (url) => {
     }
 
     const getInitialPage = async () => {
-        console.log("Loading initial page");
         setAppState({ loading: true, error: false, posts: null, next: null, previous: null})
         axiosInstance.get(url,{
             params: {
@@ -36,13 +35,16 @@ const useFetchData = (url) => {
     }
 
     useEffect(() => {
-        getInitialPage().then(() => {
-            console.log("Initial page loaded");
-        });
+        getInitialPage().catch(err => console.log(err));
     }, []);
 
 
-    return [appState, getNextPage, search, getInitialPage];
+    return {
+        appState,
+        getNextPage,
+        search,
+        getInitialPage
+    };
 };
 
 export default useFetchData;

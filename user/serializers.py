@@ -6,7 +6,7 @@ from .models import User
 class RegisterUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('user_name', 'email', 'password')
+        fields = ('user_name', 'email', 'password', 'balance')
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
@@ -23,6 +23,5 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
         token['username'] = user.user_name
-        token['balance'] = user.balance
 
         return token

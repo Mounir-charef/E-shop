@@ -18,7 +18,6 @@ export const AuthContextProvider = ({children}) => {
         if (token) {
             localStorage.setItem("access_token", token);
             const decoded = jwt_decode(token);
-            console.log(decoded)
             localStorage.setItem("username", decoded.username);
             localStorage.setItem("balance", decoded.balance);
             setUsername(decoded.username);

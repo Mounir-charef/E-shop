@@ -15,10 +15,10 @@ const Post = ({post}) => {
 
     const handleAddToCart = () => {
         setOrdering(true);
-        axiosInstance.post(baseUrl +'api/order/', {
+        axiosInstance.post(baseUrl +'api/orders/', {
             product: post.id,
             quantity: inputRef.current.value
-        }).then(res => {
+        }).then(() => {
             showMessage({text: `${inputRef.current.value} of ${post.name} Added to cart`, type: 'success'});}
         ).catch(err => {
             if (err.response === undefined) {

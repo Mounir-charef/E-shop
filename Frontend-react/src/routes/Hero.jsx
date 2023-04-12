@@ -1,16 +1,13 @@
 import Posts from "../components/Posts.jsx";
-import PostLoading from "../components/PostLoading.jsx";
+import ComponentLoading from "../components/ComponentLoading.jsx";
 import useFetchData from "../hooks/useFetchData.jsx";
 import ErrorHandler from "../components/ErrorHandeler.jsx";
 import {useContext} from "react";
-import {useNavigate} from "react-router-dom";
 import AuthContext from "../AuthContext.jsx";
 const Hero = () => {
-    const navigate = useNavigate();
-    const {baseUrl, token} = useContext(AuthContext);
-    if (!token) navigate('/login');
-    const PostLoadingComponent = PostLoading(Posts),
-        [appState, getNextPage, search, getInitialPage] = useFetchData(baseUrl + 'api/products/');
+    const {baseUrl} = useContext(AuthContext);
+    const PostLoadingComponent = ComponentLoading(Posts),
+        {appState, getNextPage, getInitialPage} = useFetchData(baseUrl + 'api/products/');
     const hasPrevious = appState.previous !== null,
         hasNext = appState.next !== null;
 
