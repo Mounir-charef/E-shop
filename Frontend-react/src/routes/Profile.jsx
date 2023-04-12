@@ -67,9 +67,9 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <div className='w-3/5 bg-gray-300 mx-auto my-12 rounded p-12'>
+            <div className=' w-[90%] lg:w-3/5 bg-gray-300 mx-auto my-12 rounded p-6 md:p-12'>
                 <h1 className='text-center font-semibold font-Pacifico text-5xl'>Orders</h1>
-                <div className='p-6'>
+                <div className='flex flex-col p-6'>
                     <div className="flex justify-between items-center">
                         <button
                             className={
