@@ -8,9 +8,12 @@ const AddBalance = ({ show, setShow, refresh }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (amount === "") {
+      setError("Amount is required.");
+      return;
+    }
     try {
-      const res = await axiosInstance.patch("http://localhost:8000/api/user/add_balance/", { amount: amount });
-      console.log(res.data);
+      await axiosInstance.patch("http://localhost:8000/api/user/add_balance/", { amount: amount });
       refresh();
       setShow(false);
     } catch (err) {
