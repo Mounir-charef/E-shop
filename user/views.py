@@ -1,19 +1,36 @@
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from .serializers import RegisterUserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.generics import UpdateAPIView
 
 
 class RetrieveUserView(APIView):
-    permission_classes = (AllowAny,)
+    permission_classes = (IsAuthenticated,)
 
     @staticmethod
     def get(request):
         try:
             user_data = RegisterUserSerializer(request.user).data
             return Response(user_data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'error': e}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class AddBalanceView(UpdateAPIView):
+    permission_classes = (IsAuthenticated,)
+    serializer_class = RegisterUserSerializer
+
+    def update(self, request, *args, **kwargs):
+        try:
+            user = request.user
+            amount = float(request.data.get('amount', 0))
+            user.balance += amount
+            user.save()
+            serializer = self.get_serializer(user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': e}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

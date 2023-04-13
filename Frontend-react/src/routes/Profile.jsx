@@ -2,6 +2,7 @@ import {useState, useEffect, useContext} from 'react';
 import Orders from "../components/Orders.jsx";
 import componentLoading from "../components/ComponentLoading.jsx";
 import ErrorHandler from "../components/ErrorHandeler.jsx";
+import AddBalance from "../components/AddBalance.jsx";
 import axiosInstance from "../axios.js";
 import AuthContext from "../AuthContext.jsx";
 import useFetchOrders from "../hooks/useFetchOrders.jsx";
@@ -14,6 +15,7 @@ const Profile = () => {
     const {baseUrl} = useContext(AuthContext);
     const OrderLoadingComponent = componentLoading(Orders);
     const {appState, getNextPage, getInitialPage} = useFetchOrders({url: baseUrl + 'api/orders/'});
+    const [showBalanceWindow, setShowBalanceWindow] = useState(false);
     const getUser = async () => {
             const res = await axiosInstance.get(baseUrl + 'api/user');
             setUser(res.data);
@@ -37,9 +39,14 @@ const Profile = () => {
 
     }, []);
 
+    useEffect(() => {
+        document.body.className = showBalanceWindow ? 'overflow-hidden' : null;
+    }, [showBalanceWindow]);
+
     if (appState.error) return <ErrorHandler retry={refresh} loading={appState.loading} />;
     return (
         <>
+            <AddBalance show={showBalanceWindow} setShow={setShowBalanceWindow} refresh={refresh}/>
             <div>
                 <div className='w-3/5 bg-gray-300 mx-auto mt-12 rounded p-12'>
                     <h1 className='text-center font-semibold font-Pacifico text-5xl'>Profile</h1>
@@ -61,6 +68,12 @@ const Profile = () => {
                                     <p className="text-lg font-semibold">{user.user_name}</p>
                                     <p className="text-lg font-semibold">{user.email}</p>
                                     <p className="text-lg font-semibold">Your Balance: {user.balance}$</p>
+                                    <button
+                                        className="active-btn rounded"
+                                        onClick={() => setShowBalanceWindow(true)}
+                                    >
+                                        Add Balance
+                                    </button>
                                 </>
                             )}
                         </div>
@@ -73,7 +86,7 @@ const Profile = () => {
                     <div className="flex justify-between items-center">
                         <button
                             className={
-                                appState.previous !== null ? "active-btn" :
+                                appState.previous !== null ? "active-btn rounded" :
                                     "disabled-btn"
                             }
                             onClick={getNextPage}
@@ -84,7 +97,7 @@ const Profile = () => {
                         </button>
                         <button
                             className={
-                                appState.next !== null ? "active-btn" :
+                                appState.next !== null ? "active-btn rounded" :
                                     "disabled-btn"
                             }
                             onClick={getNextPage}
