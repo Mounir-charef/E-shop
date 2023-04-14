@@ -28,12 +28,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', False)
+DEVELOPMENT_MODE = os.getenv('DEVELOPMENT_MODE', False)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '6ae3-41-109-89-253.ngrok-free.app']
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
-#cors
-CORS_ORIGIN_ALLOW_ALL = True
+# cors allow localhost:5173
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173', ]
 
 # Application definition
 
@@ -161,13 +162,8 @@ REST_FRAMEWORK = {
 # DjangoObjectPermissionsOrAnonReadOnly
 
 
-CORS_ALLOWED_ORIGINS = [
-    'http://127.0.0.1:5173',
-]
-
 MEDIA_URL = '/products/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'products')
-
 
 AUTH_USER_MODEL = 'user.User'
 
