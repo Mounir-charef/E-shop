@@ -10,7 +10,6 @@ import Footer from "./components/Footer.jsx";
 import Hero from "./routes/Hero.jsx";
 import Login from "./routes/Login.jsx";
 import Register from "./routes/Register.jsx";
-import Logout from "./routes/Logout.jsx";
 import Profile from "./routes/Profile.jsx";
 import './index.css'
 import {AuthContextProvider} from "./AuthContext.jsx";
@@ -34,7 +33,6 @@ const router = createBrowserRouter(createRoutesFromElements([
         <Route path={'/'} element={<Hero />} index={true} />
     </Route>,
     <Route path={'/login'} element={<Login />} />,
-    <Route path={'/logout'} element={<Logout />}  />,
     <Route path={'/register'} element={<Register />} />
 
     ]))

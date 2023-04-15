@@ -4,6 +4,7 @@ import useFetchData from "../hooks/useFetchData.jsx";
 import ErrorHandler from "../components/ErrorHandeler.jsx";
 import {useContext} from "react";
 import AuthContext from "../AuthContext.jsx";
+
 const Hero = () => {
     const {baseUrl} = useContext(AuthContext);
     const PostLoadingComponent = ComponentLoading(Posts),
@@ -12,6 +13,7 @@ const Hero = () => {
         hasNext = appState.next !== null;
 
     if (appState.error) return <ErrorHandler retry={getInitialPage} loading={appState.loading} />;
+
 
 
     return (

@@ -5,11 +5,12 @@ import { useState, useContext } from 'react';
 import AuthContext from '../AuthContext.jsx';
 import {useLocation, useNavigate} from "react-router-dom";
 import SearchField from "./SearchField.jsx";
+import axiosInstance from "../axios.js";
 
 const Header = () => {
     const navigate = useNavigate();
     const {pathname} = useLocation();
-    const {name} = useContext(AuthContext);
+    const {name, setToken} = useContext(AuthContext);
     const search = new URLSearchParams(window.location.search).get('search');
     const data = useState({search: ''});
 
@@ -22,6 +23,15 @@ const Header = () => {
             navigate("/");
         }
         window.location.reload();
+    }
+
+    const logout = () => {
+        axiosInstance.post('http://localhost:8000/api/user/blacklist/', {
+			refresh_token: localStorage.getItem('refresh_token'),
+		}).catch((error) => console.log(error));
+		setToken(null);
+		localStorage.removeItem('refresh_token');
+		axiosInstance.defaults.headers['Authorization'] = null;
     }
 
     return (
@@ -39,9 +49,9 @@ const Header = () => {
                         <IoPersonOutline />
                         <p className='text-sm self-end'>{name}</p>
                     </Link>
-                    <Link className='nav-item'  to='/logout'>
+                    <i className='nav-item' onClick={logout}>
                         <IoLogOutOutline/>
-                    </Link>
+                    </i>
                 </div>
             </div>
         </nav>
