@@ -39,7 +39,6 @@ const login = () => {
         setFormData(initialFormData);
     }
     useEffect(() => {
-        console.log(token)
         if (token !== null) {
             navigate('/');
         }
