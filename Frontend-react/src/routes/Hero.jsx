@@ -13,6 +13,7 @@ const Hero = () => {
 
     if (appState.error) return <ErrorHandler retry={getInitialPage} loading={appState.loading} />;
 
+
     return (
         <div className='min-h-fit'>
             <div className="flex justify-between items-center">

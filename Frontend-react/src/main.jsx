@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
-  createBrowserRouter,
-  RouterProvider, Outlet,
+    createRoutesFromElements,
+    createBrowserRouter,
+    RouterProvider, Outlet, Route, Navigate,
 } from "react-router-dom";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
@@ -13,8 +14,11 @@ import Logout from "./routes/Logout.jsx";
 import Profile from "./routes/Profile.jsx";
 import './index.css'
 import {AuthContextProvider} from "./AuthContext.jsx";
+import AuthContext from "./AuthContext.jsx";
 
 const App = () => {
+    const {token} = React.useContext(AuthContext)
+    if (!token) return <Navigate to='/login' />
     return (
         <>
             <Header />
@@ -24,12 +28,16 @@ const App = () => {
     )
 }
 
-const routes = [
-        { path: '/', element: <Hero />, index: true},
-        { path: '/profile', element: <Profile />},
-    ]
+const router = createBrowserRouter(createRoutesFromElements([
+    <Route path={'/'} element={<App />}>
+        <Route path={'/profile'} element={<Profile />} />
+        <Route path={'/'} element={<Hero />} index={true} />
+    </Route>,
+    <Route path={'/login'} element={<Login />} />,
+    <Route path={'/logout'} element={<Logout />}  />,
+    <Route path={'/register'} element={<Register />} />
 
-const router = createBrowserRouter([{element: <App />, children: routes},{ path: '/login', element: <Login /> },{ path: '/logout', element: <Logout /> },{ path: '/register', element: <Register />},])
+    ]))
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

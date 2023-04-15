@@ -34,7 +34,7 @@ DEVELOPMENT_MODE = os.getenv('DEVELOPMENT_MODE', False)
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
 # cors allow localhost:5173
-CORS_ALLOWED_ORIGINS = ['http://localhost:5173', ]
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173']
 
 # Application definition
 

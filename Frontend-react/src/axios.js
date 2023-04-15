@@ -30,11 +30,12 @@ axiosInstance.interceptors.response.use(
 			error.response.status === 401 &&
 			(
 				originalRequest.url === baseURL + 'token/refresh/'
-			) ||
-			(
-				error.response.data.detail === 'Authentication credentials were not provided.' &&
-				error.response.statusText === 'Unauthorized'
 			)
+			// ||
+			// (
+			// 	error.response.data.detail === 'Authentication credentials were not provided.' &&
+			// 	error.response.statusText === 'Unauthorized'
+			// )
 		) {
 			window.location.href = '/login/';
 			return Promise.reject(error);

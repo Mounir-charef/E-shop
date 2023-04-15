@@ -1,5 +1,5 @@
 import axiosInstance from "../axios";
-import {useState, useContext} from "react";
+import {useState, useContext, useEffect} from "react";
 import AuthContext from "../AuthContext.jsx";
 import {Link, useNavigate} from "react-router-dom";
 import LoginForm from "../components/LoginForm.jsx";
@@ -7,7 +7,7 @@ import {useMessage} from "../hooks/useMessage.jsx";
 
 const login = () => {
     const { message, showMessage } = useMessage(4000);
-    const {setToken, baseUrl} = useContext(AuthContext);
+    const {setToken, token, baseUrl} = useContext(AuthContext);
     const navigate = useNavigate();
     const initialFormData = Object.freeze({
         email: "",
@@ -30,15 +30,20 @@ const login = () => {
                 password: formData.password,
             })
             .then((res) => {
-                    setToken(res.data.access);
                     localStorage.setItem("refresh_token", res.data.refresh);
                     axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
-                    navigate("/", {replace: true});
+                    setToken(res.data.access);
             }).catch(() => {
                 showMessage({text: "Invalid credentials", type: "error"});
         });
         setFormData(initialFormData);
     }
+    useEffect(() => {
+        console.log(token)
+        if (token !== null) {
+            navigate('/');
+        }
+    }, [token])
 
     return (
         <>
