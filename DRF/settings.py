@@ -34,7 +34,7 @@ DEVELOPMENT_MODE = os.getenv('DEVELOPMENT_MODE', False)
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
 # cors allow localhost:5173
-CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173']
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://127.0.0.1:8000']
 
 # Application definition
 
@@ -170,8 +170,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'products')
 AUTH_USER_MODEL = 'user.User'
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=5),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
+    "ACCESS_TOKEN_LIFETIME": timedelta(seconds=2),
+    "REFRESH_TOKEN_LIFETIME": timedelta(seconds=2),
     "ROTATE_REFRESH_TOKENS": True,
     "BLACKLIST_AFTER_ROTATION": True,
     "UPDATE_LAST_LOGIN": False,

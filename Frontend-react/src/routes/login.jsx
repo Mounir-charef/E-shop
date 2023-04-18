@@ -1,9 +1,10 @@
 import axiosInstance from "../axios";
 import {useState, useContext, useEffect} from "react";
 import AuthContext from "../AuthContext.jsx";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import LoginForm from "../components/LoginForm.jsx";
 import {useMessage} from "../hooks/useMessage.jsx";
+import jwt_decode from "jwt-decode";
 
 const login = () => {
     const { message, showMessage } = useMessage(4000);
@@ -39,8 +40,13 @@ const login = () => {
         setFormData(initialFormData);
     }
     useEffect(() => {
+
         if (token !== null) {
-            navigate('/');
+            const tokenParts = jwt_decode(token);
+            const now = Math.ceil(Date.now() / 1000);
+            if (tokenParts.exp < now) {
+                setToken(null);
+            } else navigate("/")
         }
     }, [token])
 

@@ -49,7 +49,7 @@ const Profile = () => {
             <AddBalance show={showBalanceWindow} setShow={setShowBalanceWindow} refresh={refresh}/>
             <div>
                 <div className='w-3/5 bg-gray-300 mx-auto mt-12 rounded p-12'>
-                    <h1 className='text-center font-semibold font-Pacifico text-5xl'>Profile</h1>
+                    <h1 className='text-center font-semibold font-Stylish text-5xl'>Profile</h1>
                     <div className='p-6'>
                         <div className="flex flex-col gap-2 items-center">
                             {loading ? (
@@ -81,7 +81,7 @@ const Profile = () => {
                 </div>
             </div>
             <div className=' w-[90%] lg:w-3/5 bg-gray-300 mx-auto my-12 rounded p-6 md:p-12'>
-                <h1 className='text-center font-semibold font-Pacifico text-5xl'>Orders</h1>
+                <h1 className='text-center font-semibold font-Stylish text-5xl'>Orders</h1>
                 <div className='flex flex-col p-6'>
                     <div className="flex justify-between items-center">
                         <button
