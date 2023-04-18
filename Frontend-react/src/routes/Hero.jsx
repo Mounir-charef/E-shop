@@ -18,7 +18,9 @@ const Hero = () => {
 
     return (
         <div className='min-h-fit'>
-            <div className="flex justify-between items-center">
+            <PostLoadingComponent isLoading={appState.loading} posts={appState.posts} />
+
+            <div className="flex justify-center gap-5 items-center mb-16">
                 <button
                     className={
                         hasPrevious ? "active-btn" :
@@ -43,8 +45,6 @@ const Hero = () => {
                     Next Page
                 </button>
             </div>
-
-            <PostLoadingComponent isLoading={appState.loading} posts={appState.posts} />
 
         </div>
     );

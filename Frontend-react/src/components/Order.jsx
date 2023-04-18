@@ -1,6 +1,6 @@
 const Order = ({ order }) => {
   return (
-    <div className="border rounded-md p-4 mb-4 w-[90%] text-center md:text-start">
+    <div className="border rounded-md p-4 w-[90%] text-center md:text-start">
       <div className="flex flex-col sm:flex-row justify-between mb-2">
         <h2 className="font-semibold text-lg">{order.product_name}</h2>
         <p className="text-gray-600">{order.created_at}</p>

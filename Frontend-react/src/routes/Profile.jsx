@@ -48,7 +48,7 @@ const Profile = () => {
         <>
             <AddBalance show={showBalanceWindow} setShow={setShowBalanceWindow} refresh={refresh}/>
             <div>
-                <div className='w-3/5 bg-gray-300 mx-auto mt-12 rounded p-12'>
+                <div className='w-3/5 lg:w-2/5 bg-gray-300 mx-auto mt-12 rounded-md p-12'>
                     <h1 className='text-center font-semibold font-Stylish text-5xl'>Profile</h1>
                     <div className='p-6'>
                         <div className="flex flex-col gap-2 items-center">
@@ -82,11 +82,11 @@ const Profile = () => {
             </div>
             <div className=' w-[90%] lg:w-3/5 bg-gray-300 mx-auto my-12 rounded p-6 md:p-12'>
                 <h1 className='text-center font-semibold font-Stylish text-5xl'>Orders</h1>
-                <div className='flex flex-col p-6'>
+                <div className='flex flex-col p-6 pb-0 gap-8'>
                     <div className="flex justify-between items-center">
                         <button
                             className={
-                                appState.previous !== null ? "active-btn rounded" :
+                                appState.previous !== null ? "active-btn" :
                                     "disabled-btn"
                             }
                             onClick={getNextPage}
@@ -97,7 +97,7 @@ const Profile = () => {
                         </button>
                         <button
                             className={
-                                appState.next !== null ? "active-btn rounded" :
+                                appState.next !== null ? "active-btn" :
                                     "disabled-btn"
                             }
                             onClick={getNextPage}
@@ -109,6 +109,31 @@ const Profile = () => {
                         </button>
                     </div>
                     <OrderLoadingComponent isLoading={appState.loading} orders={appState.orders}/>
+                    <div className="flex justify-between items-center">
+                        <button
+                            className={
+                                appState.previous !== null ? "active-btn" :
+                                    "disabled-btn"
+                            }
+                            onClick={getNextPage}
+                            name='prev'
+                            disabled={appState.previous === null}
+                        >
+                            Previous Page
+                        </button>
+                        <button
+                            className={
+                                appState.next !== null ? "active-btn" :
+                                    "disabled-btn"
+                            }
+                            onClick={getNextPage}
+                            name='next'
+                            disabled={appState.next === null}
+
+                        >
+                            Next Page
+                        </button>
+                    </div>
                 </div>
             </div>
         </>

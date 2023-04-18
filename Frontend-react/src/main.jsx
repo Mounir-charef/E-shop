@@ -29,7 +29,7 @@ const App = () => {
 
 const router = createBrowserRouter(createRoutesFromElements([
     <Route path={'/'} element={<App />}>
-        <Route path={'/profile'} element={<Profile />} />
+        <Route path={'/profil'} element={<Profile />} />
         <Route path={'/'} element={<Hero />} index={true} />
     </Route>,
     <Route path={'/login'} element={<Login />} />,
