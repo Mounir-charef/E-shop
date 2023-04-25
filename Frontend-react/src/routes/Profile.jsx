@@ -43,7 +43,7 @@ const Profile = () => {
         document.body.className = showBalanceWindow ? 'overflow-hidden' : null;
     }, [showBalanceWindow]);
 
-    if (appState.error) return <ErrorHandler retry={refresh} loading={appState.loading} />;
+    if (appState.error) return <ErrorHandler retry={refresh}/>;
     return (
         <>
             <AddBalance show={showBalanceWindow} setShow={setShowBalanceWindow} refresh={refresh}/>

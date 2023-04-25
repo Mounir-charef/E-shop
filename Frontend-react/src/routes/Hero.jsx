@@ -12,7 +12,7 @@ const Hero = () => {
     const hasPrevious = appState.previous !== null,
         hasNext = appState.next !== null;
 
-    if (appState.error) return <ErrorHandler retry={getInitialPage} loading={appState.loading} />;
+    if (appState.error) return <ErrorHandler retry={getInitialPage} />;
 
 
 
@@ -20,31 +20,34 @@ const Hero = () => {
         <div className='min-h-fit'>
             <PostLoadingComponent isLoading={appState.loading} posts={appState.posts} />
 
-            <div className="flex justify-center gap-5 items-center mb-16">
-                <button
-                    className={
-                        hasPrevious ? "active-btn" :
-                            "disabled-btn"
-                    }
-                    onClick={getNextPage}
-                    name='prev'
-                    disabled={appState.previous === null}
-                >
-                    Previous Page
-                </button>
-                <button
-                    className={
-                        hasNext ? "active-btn" :
-                            "disabled-btn"
-                    }
-                    onClick={getNextPage}
-                    name='next'
-                    disabled={appState.next === null}
+            {!appState.loading &&
+                (
+                    <div className="flex justify-center gap-5 items-center mb-16">
+                    <button
+                        className={
+                            hasPrevious ? "active-btn" :
+                                "disabled-btn"
+                        }
+                        onClick={getNextPage}
+                        name='prev'
+                        disabled={appState.previous === null}
+                    >
+                        Previous Page
+                    </button>
+                    <button
+                        className={
+                            hasNext ? "active-btn" :
+                                "disabled-btn"
+                        }
+                        onClick={getNextPage}
+                        name='next'
+                        disabled={appState.next === null}
 
-                >
-                    Next Page
-                </button>
-            </div>
+                    >
+                        Next Page
+                    </button>
+                </div>
+            )}
 
         </div>
     );
