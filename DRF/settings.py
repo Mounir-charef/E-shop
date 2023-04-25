@@ -151,6 +151,10 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_THROTTLE_RATES': {
+            'anon': '2/day',
+            'user': '500/day',
+        }
 }
 
 # Permissions

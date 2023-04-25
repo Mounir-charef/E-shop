@@ -6,6 +6,7 @@ from .models import Category, Product, Cart, Order
 from .serializers import CategorySerializer, ProductSerializer, CartSerializer, OrderSerializer
 from .permissions import IsOwnerOrReadOnly, IsOwnerRead
 from .paginations import CustomCursorPagination
+from rest_framework.throttling import UserRateThrottle
 from rest_framework import serializers
 # from .filters import ProductFilter
 
@@ -24,6 +25,7 @@ class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     pagination_class = CustomCursorPagination
     filter_backends = [SearchFilter]
     search_fields = ['name', 'category__name']
+    throttle_classes = [UserRateThrottle]
     # filter_backends = [DjangoFilterBackend]
     # filterset_class = ProductFilter
     # search_fields = ['name']
