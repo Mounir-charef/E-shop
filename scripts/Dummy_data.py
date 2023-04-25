@@ -9,7 +9,6 @@ def run():
     # Fetch data from dummyjson.com
     url = 'https://dummyjson.com/products?limit=200'
     response = requests.get(url)
-    print(response.status_code)
     data = response.json()
     # Create new products for this category
     for product_data in data['products']:

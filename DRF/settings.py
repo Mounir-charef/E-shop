@@ -153,7 +153,7 @@ REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_THROTTLE_RATES': {
             'anon': '2/day',
-            'user': '500/day',
+            'user': '1000/day',
         }
 }
 
