@@ -3,6 +3,7 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import {AiOutlineCiCircle} from "react-icons/ai";
 import {useMessage} from "../hooks/useMessage.jsx";
+import error_img from '../assets/error_loading.jpeg';
 import AuthContext from "../AuthContext.jsx";
 import axiosInstance from "../axios.js";
 
@@ -47,6 +48,10 @@ const Post = ({post}) => {
                         className="w-full h-64 object-cover rounded hover:opacity-95 transition cursor-pointer hover:scale-105"
                         loading='lazy'
                         onLoad={() => setLoaded(true)}
+                        onError={({ currentTarget }) => {
+                            currentTarget.onerror = null;
+                            currentTarget.src=error_img;
+                          }}
                     />
                     {!loaded && (
                         <>
