@@ -16,6 +16,7 @@ const Profile = () => {
     const OrderLoadingComponent = componentLoading(Orders);
     const {appState, getNextPage, getInitialPage} = useFetchOrders({url: baseUrl + 'api/orders/'});
     const [showBalanceWindow, setShowBalanceWindow] = useState(false);
+
     const getUser = async () => {
             const res = await axiosInstance.get(baseUrl + 'api/user');
             setUser(res.data);
@@ -47,92 +48,94 @@ const Profile = () => {
     return (
         <>
             <AddBalance show={showBalanceWindow} setShow={setShowBalanceWindow} refresh={refresh}/>
-            <div>
-                <div className='w-3/5 lg:w-2/5 bg-gray-300 mx-auto mt-12 rounded-md p-12'>
-                    <h1 className='text-center font-semibold font-Stylish text-5xl'>Profile</h1>
-                    <div className='p-6'>
-                        <div className="flex flex-col gap-2 items-center">
-                            {loading ? (
-                                <>
-                                    <Rings
-                                      height="100"
-                                      width="100"
-                                      color="#38bdf8"
-                                      radius="6"
-                                      visible={true}
-                                      ariaLabel="rings-loading"
-                                    />
-                                </>
-                            ) : (
-                                <>
-                                    <p className="text-lg font-semibold">{user.user_name}</p>
-                                    <p className="text-lg font-semibold">{user.email}</p>
-                                    <p className="text-lg font-semibold">Your Balance: {user.balance}$</p>
-                                    <button
-                                        className="active-btn rounded"
-                                        onClick={() => setShowBalanceWindow(true)}
-                                    >
-                                        Add Balance
-                                    </button>
-                                </>
-                            )}
+            <div className='bg-gradient-to-bl from-[#afd9d8] to-sky-100 py-12'>
+                <div>
+                    <div className='w-3/5 lg:w-2/5 bg-white shadow-2xl mx-auto mb-12 rounded-md p-12'>
+                        <h1 className='text-center font-semibold font-Stylish text-5xl'>Profile</h1>
+                        <div className='p-6'>
+                            <div className="flex flex-col gap-2 items-center">
+                                {loading ? (
+                                    <>
+                                        <Rings
+                                          height="100"
+                                          width="100"
+                                          color="#38bdf8"
+                                          radius="6"
+                                          visible={true}
+                                          ariaLabel="rings-loading"
+                                        />
+                                    </>
+                                ) : (
+                                    <>
+                                        <p className="text-lg font-semibold">{user.user_name}</p>
+                                        <p className="text-lg font-semibold">{user.email}</p>
+                                        <p className="text-lg font-semibold">Your Balance: {user.balance}$</p>
+                                        <button
+                                            className="active-btn rounded"
+                                            onClick={() => setShowBalanceWindow(true)}
+                                        >
+                                            Add Balance
+                                        </button>
+                                    </>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className=' w-[90%] lg:w-3/5 bg-gray-300 mx-auto my-12 rounded p-6 md:p-12'>
-                <h1 className='text-center font-semibold font-Stylish text-5xl'>Orders</h1>
-                <div className='flex flex-col p-6 pb-0 gap-8'>
-                    <div className="flex justify-between items-center">
-                        <button
-                            className={
-                                appState.previous !== null ? "active-btn" :
-                                    "disabled-btn"
-                            }
-                            onClick={getNextPage}
-                            name='prev'
-                            disabled={appState.previous === null}
-                        >
-                            Previous Page
-                        </button>
-                        <button
-                            className={
-                                appState.next !== null ? "active-btn" :
-                                    "disabled-btn"
-                            }
-                            onClick={getNextPage}
-                            name='next'
-                            disabled={appState.next === null}
+                <div className=' w-[90%] lg:w-3/5 bg-white shadow-2xl mx-auto rounded p-6 md:p-12'>
+                    <h1 className='text-center font-semibold font-Stylish text-5xl'>Orders</h1>
+                    <div className='flex flex-col p-6 pb-0 gap-8'>
+                        <div className="flex justify-between items-center">
+                            <button
+                                className={
+                                    appState.previous !== null ? "active-btn" :
+                                        "disabled-btn"
+                                }
+                                onClick={getNextPage}
+                                name='prev'
+                                disabled={appState.previous === null}
+                            >
+                                Previous Page
+                            </button>
+                            <button
+                                className={
+                                    appState.next !== null ? "active-btn" :
+                                        "disabled-btn"
+                                }
+                                onClick={getNextPage}
+                                name='next'
+                                disabled={appState.next === null}
 
-                        >
-                            Next Page
-                        </button>
-                    </div>
-                    <OrderLoadingComponent isLoading={appState.loading} orders={appState.orders}/>
-                    <div className="flex justify-between items-center">
-                        <button
-                            className={
-                                appState.previous !== null ? "active-btn" :
-                                    "disabled-btn"
-                            }
-                            onClick={getNextPage}
-                            name='prev'
-                            disabled={appState.previous === null}
-                        >
-                            Previous Page
-                        </button>
-                        <button
-                            className={
-                                appState.next !== null ? "active-btn" :
-                                    "disabled-btn"
-                            }
-                            onClick={getNextPage}
-                            name='next'
-                            disabled={appState.next === null}
+                            >
+                                Next Page
+                            </button>
+                        </div>
+                        <OrderLoadingComponent isLoading={appState.loading} orders={appState.orders} refresh={refresh}/>
+                        <div className="flex justify-between items-center">
+                            <button
+                                className={
+                                    appState.previous !== null ? "active-btn" :
+                                        "disabled-btn"
+                                }
+                                onClick={getNextPage}
+                                name='prev'
+                                disabled={appState.previous === null}
+                            >
+                                Previous Page
+                            </button>
+                            <button
+                                className={
+                                    appState.next !== null ? "active-btn" :
+                                        "disabled-btn"
+                                }
+                                onClick={getNextPage}
+                                name='next'
+                                disabled={appState.next === null}
 
-                        >
-                            Next Page
-                        </button>
+                            >
+                                Next Page
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
