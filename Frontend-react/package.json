@@ -20,7 +20,8 @@
     "react-loader-spinner": "^5.3.4",
     "react-loading-skeleton": "^3.2.0",
     "react-router-dom": "^6.9.0",
-    "reactstrap": "^9.1.9"
+    "reactstrap": "^9.1.9",
+    "tailwind-scrollbar-hide": "^1.1.7"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

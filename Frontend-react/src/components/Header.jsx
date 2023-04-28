@@ -37,9 +37,9 @@ const Header = () => {
     return (
         <nav className='bg-gray-900 h-20 font-[1.2] sticky w-full top-0 z-10'>
             <div className='flex px-4 md:px-12 justify-between items-center h-full'>
-                <Link className='title nav-item flex gap-1 ' to="/">
+                <p className='title nav-item flex gap-1 ' onClick={goSearch}>
                     E-Shop <FaShopify/>
-                </Link>
+                </p>
                 <div className='flex gap-5 items-center'>
                     {pathname === '/' &&
                         <SearchField placeHolder='Search' data={data} goSearch={goSearch} search={search}/>

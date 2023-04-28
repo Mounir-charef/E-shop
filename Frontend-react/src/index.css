@@ -2,24 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+    /* Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+}
+
 @layer components {
+    body {
+        @apply no-scrollbar;
+    }
     .nav-item {
         @apply no-underline cursor-pointer text-2xl lg:text-4xl text-white hover:text-sky-400 transition;
     }
     .title {
-        @apply text-3xl lg:text-5xl text-sky-400/100 font-Stylish whitespace-nowrap;
+        @apply text-3xl lg:text-5xl text-[#0096C7] font-Stylish whitespace-nowrap;
     }
     .active-btn {
-        @apply bg-sky-700 text-white px-4 py-2 rounded font-semibold hover:bg-transparent border border-sky-700 hover:text-sky-700 transition;
+        @apply bg-[#0077B6] text-white px-4 py-2 rounded font-semibold hover:bg-transparent border border-[#0077B6] hover:text-sky-700 transition;
     }
     .disabled-btn {
         @apply bg-sky-700 text-white px-4 py-2 rounded font-semibold hover:bg-transparent border border-sky-700 hover:text-sky-700 transition opacity-50 cursor-not-allowed;
     }
     .skeleton {
         @apply h-64 w-full absolute inset-0;
-    }
-    .add-btn {
-        @apply bg-sky-700 text-white px-4 py-2 rounded font-semibold hover:bg-transparent border border-sky-700 hover:text-sky-700 transition;
     }
 
     .form-wrap {
@@ -42,9 +54,10 @@
         @apply bg-sky-700 text-white px-4 py-2 rounded font-semibold hover:bg-transparent border border-sky-700 hover:text-sky-700 transition;
     }
 
+
     .card-wrap::after {
       content: attr(data-category);
-      @apply absolute top-0 py-1 px-2 max-w-[calc(100%-60px)] text-xs font-bold text-white bg-blue-500 box-border z-auto transition;
+      @apply absolute top-0 py-1 px-2 max-w-[calc(100%-60px)] text-xs font-bold text-white bg-[#fdb833] box-border z-auto transition;
     }
 }
 

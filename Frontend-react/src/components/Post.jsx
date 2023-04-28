@@ -3,7 +3,7 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import {AiOutlineCiCircle} from "react-icons/ai";
 import {useMessage} from "../hooks/useMessage.jsx";
-import error_img from '../assets/error_loading.jpeg';
+import error_img from '../assets/404_Error-rafiki.svg';
 import AuthContext from "../AuthContext.jsx";
 import axiosInstance from "../axios.js";
 
@@ -83,7 +83,7 @@ const Post = ({post}) => {
                 <div className="flex justify-between items-end mt-4">
                     <p className="text-gray-700 text-lg font-semibold font-Pacifico">{post.price}$</p>
                     <button
-                        className="add-btn"
+                        className="active-btn"
                         onClick={handleAddToCart}
                     >
                         {ordering ? (

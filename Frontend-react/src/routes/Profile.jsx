@@ -51,7 +51,7 @@ const Profile = () => {
             <div className='bg-gradient-to-bl from-[#afd9d8] to-sky-100 py-12'>
                 <div>
                     <div className='w-3/5 lg:w-2/5 bg-white shadow-2xl mx-auto mb-12 rounded-md p-12'>
-                        <h1 className='text-center font-semibold font-Stylish text-5xl'>Profile</h1>
+                        <h1 className='text-center font-semibold text-5xl'>Profile</h1>
                         <div className='p-6'>
                             <div className="flex flex-col gap-2 items-center">
                                 {loading ? (
@@ -83,7 +83,7 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className=' w-[90%] lg:w-3/5 bg-white shadow-2xl mx-auto rounded p-6 md:p-12'>
-                    <h1 className='text-center font-semibold font-Stylish text-5xl'>Orders</h1>
+                    <h1 className='text-center font-semibold text-5xl'>Orders</h1>
                     <div className='flex flex-col p-6 pb-0 gap-8'>
                         <div className="flex justify-between items-center">
                             <button

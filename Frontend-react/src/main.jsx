@@ -14,6 +14,7 @@ import Profile from "./routes/Profile.jsx";
 import './index.css'
 import {AuthContextProvider} from "./AuthContext.jsx";
 import AuthContext from "./AuthContext.jsx";
+import Product from "./routes/Product.jsx";
 
 const App = () => {
     const {token} = React.useContext(AuthContext)
@@ -31,6 +32,7 @@ const router = createBrowserRouter(createRoutesFromElements([
     <Route path={'/'} element={<App />}>
         <Route path={'/profil'} element={<Profile />} />
         <Route path={'/'} element={<Hero />} index={true} />
+        <Route path={'/:id'} element={<Product />} />
     </Route>,
     <Route path={'/login'} element={<Login />} />,
     <Route path={'/register'} element={<Register />} />
