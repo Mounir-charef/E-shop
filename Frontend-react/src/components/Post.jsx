@@ -4,10 +4,12 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import {AiOutlineCiCircle} from "react-icons/ai";
 import {useMessage} from "../hooks/useMessage.jsx";
 import error_img from '../assets/404_Error-rafiki.svg';
+import {useNavigate} from "react-router-dom";
 import AuthContext from "../AuthContext.jsx";
 import axiosInstance from "../axios.js";
 
 const Post = ({post}) => {
+    const navigate = useNavigate();
     const {baseUrl} = useContext(AuthContext);
     const [loaded, setLoaded] = useState(false);
     const [ordering, setOrdering] = useState(false);
@@ -47,6 +49,7 @@ const Post = ({post}) => {
                         alt={post.name}
                         className="w-full h-64 object-cover rounded hover:opacity-95 transition cursor-pointer hover:scale-105"
                         loading='lazy'
+                        onClick={() => navigate(`${post.id}`)}
                         onLoad={() => setLoaded(true)}
                         onError={({ currentTarget }) => {
                             currentTarget.onerror = null;
