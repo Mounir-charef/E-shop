@@ -95,7 +95,10 @@ class OrderViewSet(viewsets.ModelViewSet):
             cart.orders.add(serializer.instance)
             self.request.user.save()
         else:
-            raise serializers.ValidationError({'message': "You don't have enough money to pay for this order"}, code=400)
+            raise serializers.ValidationError(
+                {'message': "You don't have enough money to pay for this order"},
+                code=400
+            )
 
     def perform_destroy(self, instance):
         cart = Cart.objects.get_or_create(user=self.request.user)[0]

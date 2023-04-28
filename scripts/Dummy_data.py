@@ -17,7 +17,10 @@ def run():
         price = float(product_data['price'])
         description = product_data['description']
         image = product_data['thumbnail']
-        Product.objects.create(name=name, category=category, price=price, description=description, image=image)
+        images = product_data['images']
+        Product.objects.create(
+            name=name, category=category, price=price, description=description, image=image, images=images
+        )
 
     # fetch users from dummyjson.com
     url = 'https://dummyjson.com/users?limit=25'
