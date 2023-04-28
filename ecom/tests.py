@@ -1,6 +1,6 @@
 # from django.test import TestCase
 # from django.contrib.auth.models import User
-# from .models import Post, Category
+# from .models import Item, Category
 #
 #
 # class TestCreatePost(TestCase):
@@ -13,14 +13,14 @@
 #             username='test_user1', password='123456789')
 #         testuser1.save()
 #
-#         test_post = Post.objects.create(
-#             category=test_category, title='Post Title', excerpt='Post Excerpt',
-#             content='Post Content', slug='post-title', author_id=1,
+#         test_post = Item.objects.create(
+#             category=test_category, title='Item Title', excerpt='Item Excerpt',
+#             content='Item Content', slug='post-title', author_id=1,
 #             status='published')
 #         test_post.save()
 #
 #     def test_blog_content(self):
-#         post = Post.objects.get(id=1)
+#         post = Item.objects.get(id=1)
 #         category = Category.objects.get(id=1)
 #         author = f'{post.author}'
 #         title = f'{post.title}'
@@ -28,9 +28,9 @@
 #         content = f'{post.content}'
 #         status = f'{post.status}'
 #         self.assertEqual(author, 'test_user1')
-#         self.assertEqual(title, 'Post Title')
-#         self.assertEqual(excerpt, 'Post Excerpt')
-#         self.assertEqual(content, 'Post Content')
+#         self.assertEqual(title, 'Item Title')
+#         self.assertEqual(excerpt, 'Item Excerpt')
+#         self.assertEqual(content, 'Item Content')
 #         self.assertEqual(status, 'published')
-#         self.assertEqual(str(post), 'Post Title | test_user1')
+#         self.assertEqual(str(post), 'Item Title | test_user1')
 #         self.assertEqual(str(category), 'django')

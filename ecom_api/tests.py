@@ -1,7 +1,7 @@
 # # from django.test import TestCase
 # from rest_framework import status
 # from rest_framework.test import APITestCase, APIClient
-# from blog.models import Category, Post
+# from blog.models import Category, Item
 # from django.contrib.auth.models import User
 # from django.urls import reverse
 #
@@ -40,5 +40,5 @@
 #         print(data)
 #         response = client.post(url, data, format='json')
 #         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-#         self.assertEqual(Post.objects.count(), 1)
-#         self.assertEqual(Post.objects.get().title, 'Test Title')
+#         self.assertEqual(Item.objects.count(), 1)
+#         self.assertEqual(Item.objects.get().title, 'Test Title')

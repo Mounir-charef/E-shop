@@ -8,7 +8,7 @@ import {useNavigate} from "react-router-dom";
 import AuthContext from "../AuthContext.jsx";
 import axiosInstance from "../axios.js";
 
-const Post = ({post}) => {
+const Item = ({post}) => {
     const navigate = useNavigate();
     const {baseUrl} = useContext(AuthContext);
     const [loaded, setLoaded] = useState(false);
@@ -101,4 +101,4 @@ const Post = ({post}) => {
     );
 };
 
-export default Post;
+export default Item;
