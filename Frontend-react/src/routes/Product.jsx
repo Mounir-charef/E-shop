@@ -31,8 +31,8 @@ const Product = () => {
   }
 
   return (
-    <div className="max-w-7xl md:h-[calc(100vh-5rem)] mx-auto py-10 px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div className="md:h-[calc(100vh-5rem)] bg-gradient-to-bl from-[#afd9d8] to-sky-100 mx-auto py-10 px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto grid max-w-5xl bg-white rounded-md grid-cols-1 md:grid-cols-2 gap-10 h-full p-6">
         <Swiper
           spaceBetween={10}
           navigation
@@ -44,12 +44,12 @@ const Product = () => {
               <img
                 src={image}
                 alt={`Product ${index}`}
-                className="object-cover rounded h-[90%] w-full"
+                className="object-contain rounded select-none w-full h-96"
               />
             </SwiperSlide>
           ))}
         </Swiper>
-        <div>
+        <div className='self-center'>
           <h2 className="text-2xl font-extrabold text-gray-900 mb-4">
             {product.name}
           </h2>
