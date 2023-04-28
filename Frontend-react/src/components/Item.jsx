@@ -17,6 +17,10 @@ const Item = ({post}) => {
     const {message, showMessage } = useMessage(4000);
 
     const handleAddToCart = () => {
+        if (inputRef.current.value === '' || inputRef.current.value === 0) {
+            showMessage({text: "please enter a valid quantity", type: 'error'});
+            return;
+        }
         setOrdering(true);
         axiosInstance.post(baseUrl +'api/orders/', {
             product: post.id,
@@ -72,10 +76,15 @@ const Item = ({post}) => {
                         id='quantity'
                         type='number'
                         name='quantity'
-                        min='1'
-                        max='10'
                         defaultValue='1'
                         className='w-12 h-8 border border-gray-300 rounded-md text-center'
+                        onChange={e => {
+                            if ((e.target.value < 1)) {
+                                e.target.value = 1;
+                            }else if (e.target.value > 500) {
+                                e.target.value = 500;
+                            }
+                        }}
                     />
                     <label htmlFor="quantity">
                         <span className='px-2 text-gray-500 text-sm'>
