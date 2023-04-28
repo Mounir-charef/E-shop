@@ -49,7 +49,7 @@ const Product = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className='self-center'>
+        <div className='self-center flex flex-col'>
           <h2 className="text-2xl font-extrabold text-gray-900 mb-4">
             {product.name}
           </h2>
@@ -73,7 +73,7 @@ const Product = () => {
                 className='w-12 h-8 border border-gray-300 rounded-md text-center'
             />
           </div>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">
+          <button className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg self-center">
             Add to cart
           </button>
         </div>
