@@ -35,9 +35,9 @@ const Product = () => {
       <div className="mx-auto grid max-w-5xl bg-white rounded-md grid-cols-1 md:grid-cols-2 gap-10 h-full p-6">
         <Swiper
           spaceBetween={10}
-          navigation
-          pagination={{ clickable: true }}
-          className="max-w-md mx-auto"
+          navigation={{hideOnClick: true}}
+          pagination={{ clickable: true, dynamicBullets: true, dynamicMainBullets: 3,hideOnClick: true }}
+          className="w-full"
         >
           {product.images.map((image, index) => (
             <SwiperSlide key={index}>
@@ -73,7 +73,7 @@ const Product = () => {
                 className='w-12 h-8 border border-gray-300 rounded-md text-center'
             />
           </div>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg self-center">
+          <button className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg md:self-center">
             Add to cart
           </button>
         </div>
