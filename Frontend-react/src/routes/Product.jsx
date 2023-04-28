@@ -12,6 +12,7 @@ const Product = () => {
   const { baseUrl } = useContext(AuthContext);
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
 
   useEffect(() => {
@@ -30,7 +31,7 @@ const Product = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl md:h-[calc(100vh-5rem)] mx-auto py-10 px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <Swiper
           spaceBetween={10}
@@ -43,26 +44,34 @@ const Product = () => {
               <img
                 src={image}
                 alt={`Product ${index}`}
-                className="w-full object-contain rounded-lg shadow-lg"
+                className="object-cover rounded h-[90%] w-full"
               />
             </SwiperSlide>
           ))}
         </Swiper>
         <div>
           <h2 className="text-2xl font-extrabold text-gray-900 mb-4">
-            Product Title
+            {product.name}
           </h2>
           <p className="text-lg font-medium text-gray-700 mb-6">
-            Product description lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Suspendisse varius enim in eros elementum tristique.
+            {product.description}
           </p>
           <div className="flex items-center justify-between mb-6">
-            <span className="text-gray-500">Size:</span>
-            <span className="text-gray-900 font-medium">Medium</span>
+            <span className="text-gray-500">Price:</span>
+            <span className="text-gray-900 font-medium">${quantity * product.price}</span>
           </div>
           <div className="flex items-center justify-between mb-6">
-            <span className="text-gray-500">Price:</span>
-            <span className="text-gray-900 font-medium">$20</span>
+            <span className="text-gray-500">Quantity:</span>
+            <input
+                type="number"
+                name="quantity"
+                id="quantity"
+                min="1"
+                max="500"
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
+                className='w-12 h-8 border border-gray-300 rounded-md text-center'
+            />
           </div>
           <button className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg">
             Add to cart
