@@ -2,7 +2,7 @@ import axiosInstance from "../axios.js";
 import { useState } from "react";
 import { XCircleIcon } from "@heroicons/react/24/outline/index.js";
 
-const AddBalance = ({ show, setShow, refresh }) => {
+const AddBalance = ({ setShow, refresh }) => {
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
 
@@ -33,9 +33,7 @@ const AddBalance = ({ show, setShow, refresh }) => {
 
   return (
     <div
-      className={`fixed w-screen h-screen bg-gray-900 bg-opacity-50 z-50 ${
-        show ? "block" : "hidden"
-      }`}
+      className='fixed w-screen h-screen bg-gray-900 bg-opacity-50 z-50'
     >
       <div className="w-full max-w-md bg-white rounded-md mx-auto mt-20 p-6">
         <div className="flex justify-between items-center">

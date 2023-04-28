@@ -2,7 +2,7 @@ import axiosInstance from "../axios.js";
 import { useState } from "react";
 import { XCircleIcon } from "@heroicons/react/24/outline/index.js";
 
-const DeleteOrder = ({ show, setShow, orderId, refresh }) => {
+const DeleteOrder = ({ setShow, orderId, refresh }) => {
   const [error, setError] = useState("");
 
   const handleDelete = async () => {
@@ -17,9 +17,7 @@ const DeleteOrder = ({ show, setShow, orderId, refresh }) => {
 
   return (
     <div
-      className={`fixed top-0 w-screen h-screen bg-gray-900 bg-opacity-50 z-50 ${
-        show ? "block" : "hidden"
-      }`}
+      className='fixed top-0 w-screen h-screen bg-gray-900 bg-opacity-50 z-50'
     >
       <div className="w-full max-w-md bg-white rounded-md mt-[40vh] mx-auto mt-20 p-6">
         <div className="flex justify-between items-center">

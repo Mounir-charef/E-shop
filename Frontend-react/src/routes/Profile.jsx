@@ -47,7 +47,7 @@ const Profile = () => {
     if (appState.error) return <ErrorHandler retry={refresh}/>;
     return (
         <>
-            <AddBalance show={showBalanceWindow} setShow={setShowBalanceWindow} refresh={refresh}/>
+            {showBalanceWindow && <AddBalance setShow={setShowBalanceWindow} refresh={refresh}/>}
             <div className='bg-gradient-to-bl from-[#afd9d8] to-sky-100 py-12'>
                 <div>
                     <div className='w-3/5 lg:w-2/5 bg-white shadow-2xl mx-auto mb-12 rounded-md p-12'>

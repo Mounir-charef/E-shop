@@ -11,7 +11,7 @@ const Order = ({ order, refresh }) => {
 
   return (
       <>
-          <DeleteOrder show={showDeleteOrderWindow} setShow={setShowDeleteOrderWindow} orderId={order.id} refresh={refresh}/>
+          {showDeleteOrderWindow && <DeleteOrder setShow={setShowDeleteOrderWindow} orderId={order.id} refresh={refresh}/>}
           <div className="border rounded-md p-4 w-[90%] text-center md:text-start relative">
               <div className="flex flex-col sm:flex-row justify-between mb-2">
                   <img
