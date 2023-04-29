@@ -33,6 +33,9 @@
     .skeleton {
         @apply h-64 w-full absolute inset-0;
     }
+    .product-skeleton {
+        @apply h-96 w-full absolute inset-0;
+    }
 
     .form-wrap {
         @apply flex flex-col items-center justify-center gap-8 p-8 h-2/3 w-3/4 md:aspect-square md:w-auto bg-white rounded-lg shadow-lg;

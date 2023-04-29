@@ -9,6 +9,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.min.css";
 import {AiOutlineCiCircle} from "react-icons/ai";
 import {Rings} from "react-loader-spinner";
+import error_img from "../assets/404_Error-rafiki.svg";
+import Skeleton from "react-loading-skeleton";
 
 SwiperCore.use([Navigation, Pagination]);
 
@@ -16,6 +18,7 @@ const Product = () => {
   const { baseUrl } = useContext(AuthContext);
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [image_loaded, setImageLoaded] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const {message, showMessage } = useMessage(4000);
   const [ordering, setOrdering] = useState(false);
@@ -103,7 +106,17 @@ const Product = () => {
                     src={image}
                     alt={`Product ${index}`}
                     className="object-contain rounded select-none w-full h-96"
+                    onError={({ currentTarget }) => {
+                            currentTarget.onerror = null;
+                            currentTarget.src=error_img;
+                          }}
+                    onLoad={() => setImageLoaded(true)}
                   />
+                    {!image_loaded && (
+                        <>
+                            <Skeleton className='product-skeleton'/>
+                        </>
+                    )}
                 </SwiperSlide>
               ))}
             </Swiper>

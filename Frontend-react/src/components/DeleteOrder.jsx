@@ -28,7 +28,7 @@ const DeleteOrder = ({ setShow, orderId, refresh }) => {
         </div>
         <div className="mt-4">
           <p className="text-sm text-gray-700">
-            Are you sure you want to delete this order?
+            Are you sure you want to cancel this order?
           </p>
           {error && (
             <p className="mt-2 text-sm text-red-600">{error}</p>
