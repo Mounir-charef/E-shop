@@ -1,13 +1,15 @@
 import axiosInstance from "../axios.js";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { XCircleIcon } from "@heroicons/react/24/outline/index.js";
+import AuthContext from "../AuthContext.jsx";
 
 const DeleteOrder = ({ setShow, orderId, refresh }) => {
   const [error, setError] = useState("");
+    const { baseUrl } = useContext(AuthContext);
 
   const handleDelete = async () => {
     try {
-      await axiosInstance.delete(`http://localhost:8000/api/orders/${orderId}/`);
+      await axiosInstance.delete(`${baseUrl}api/orders/${orderId}/`);
       refresh();
       setShow(false);
     } catch (err) {

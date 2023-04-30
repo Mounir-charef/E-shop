@@ -52,8 +52,8 @@ const Profile = () => {
                 <div>
                     <div className='w-4/5 lg:w-2/5 bg-white shadow-2xl mx-auto mb-12 rounded-md p-12'>
                         <h1 className='text-center font-semibold text-5xl'>Profile</h1>
-                        <div className='p-6'>
-                            <div className="flex flex-col gap-2 items-center">
+                        <div className='pt-6'>
+                            <div className="flex flex-col gap-2 items-center whitespace-nowrap w-full justify-center">
                                 {loading ? (
                                     <>
                                         <Rings

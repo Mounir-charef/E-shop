@@ -1,10 +1,12 @@
 import axiosInstance from "../axios.js";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { XCircleIcon } from "@heroicons/react/24/outline/index.js";
+import AuthContext from "../AuthContext.jsx";
 
 const AddBalance = ({ setShow, refresh }) => {
   const [amount, setAmount] = useState("");
   const [error, setError] = useState("");
+    const { baseUrl } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,7 +15,7 @@ const AddBalance = ({ setShow, refresh }) => {
       return;
     }
     try {
-      await axiosInstance.patch("http://localhost:8000/api/user/add_balance/", { amount: amount });
+      await axiosInstance.patch(baseUrl+"api/user/add_balance/", { amount: amount });
       refresh();
       setShow(false);
     } catch (err) {
