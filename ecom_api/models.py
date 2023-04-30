@@ -45,8 +45,9 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("user"), default=1)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("product"), default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("user"), null=False, blank=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("product"), null=False, blank=False)
+    total_price = models.DecimalField(_("total price"), max_digits=8, decimal_places=2, null=False, blank=True)
     # quantities = models.JSONField(_("quantities"))
     quantity = IntegerRangeField(_("quantity"), default=1, min_value=1, max_value=100)
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)

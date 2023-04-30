@@ -39,7 +39,7 @@ const Order = ({ order, refresh }) => {
               </div>
               <div className="flex justify-between">
                 <p className="sm:w-1/4">Prix total :</p>
-                <p className="font-semibold">{order.total_price.toFixed(2)} €</p>
+                <p className="font-semibold">{order.total_price} €</p>
               </div>
           </div>
       </>

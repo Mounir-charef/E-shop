@@ -89,7 +89,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         # check if log in user has money to pay for the order
         total_price = serializer.validated_data['product'].price * serializer.validated_data['quantity']
         if self.request.user.balance >= total_price:
-            serializer.save(user=self.request.user)
+            serializer.save(user=self.request.user, total_price=total_price)
             cart = Cart.objects.get_or_create(user=self.request.user)[0]
             self.request.user.balance -= total_price
             cart.orders.add(serializer.instance)
@@ -101,7 +101,7 @@ class OrderViewSet(viewsets.ModelViewSet):
             )
 
     def perform_destroy(self, instance):
-        self.request.user.balance += instance.product.price * instance.quantity
+        self.request.user.balance += instance.total_price
         cart = Cart.objects.get_or_create(user=self.request.user)[0]
         cart.orders.remove(instance)
         self.request.user.save()

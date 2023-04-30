@@ -18,14 +18,9 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class OrderSerializer(serializers.ModelSerializer):
-    total_price = serializers.SerializerMethodField()
     product_name = serializers.CharField(source='product.name', read_only=True)
     product_price = serializers.CharField(source='product.price', read_only=True)
     product_image = serializers.CharField(source='product.image', read_only=True)
-
-    @staticmethod
-    def get_total_price(obj):
-        return obj.product.price * obj.quantity
 
     class Meta:
         model = Order
