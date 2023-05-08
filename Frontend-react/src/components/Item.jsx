@@ -59,14 +59,13 @@ const Item = ({post}) => {
                             currentTarget.onerror = null;
                             currentTarget.src=error_img;
                           }}
+                        width='300'
+                        height='600'
                     />
-                    {!loaded && (
-                        <>
-                            <Skeleton className='skeleton'/>
-                            <Skeleton />
-                        </>
-                    )}
                     <figcaption className="text-center text-sky-700 text-md mt-2">{post.name}</figcaption>
+                    {!loaded &&
+                            <Skeleton className='skeleton' inline={true}/>
+                    }
                 </figure>
                 <p className="text-gray-700 px-2 mt-4 text-sm line-clamp-2">{post.description}</p>
                 {/*I want to add number input field to get quantity of oder*/}
