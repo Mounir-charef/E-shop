@@ -1,5 +1,5 @@
 import axiosInstance from "../axios.js";
-import { useState, useContext } from "react";
+import {useState, useContext, useEffect} from "react";
 import { XCircleIcon } from "@heroicons/react/24/outline/index.js";
 import AuthContext from "../AuthContext.jsx";
 
@@ -33,11 +33,18 @@ const AddBalance = ({ setShow, refresh }) => {
     }
   };
 
+  useEffect(() => {
+    document.body.classList.add('overflow-hidden');
+    return () => {
+        document.body.classList.remove('overflow-hidden');
+    }
+  });
+
   return (
     <div
-      className='fixed w-screen h-screen bg-gray-900 bg-opacity-50 z-50'
+      className='fixed w-screen h-screen bg-gray-900 bg-opacity-50 z-50 flex justify-center items-center'
     >
-      <div className="w-full max-w-md bg-white rounded-md mx-auto mt-20 p-6">
+      <div className="w-full max-w-md bg-white rounded-md mx-auto -translate-y-32 p-6">
         <div className="flex justify-between items-center">
           <h3 className="text-lg font-medium text-gray-700">Add Balance</h3>
           <button onClick={() => setShow(false)}>

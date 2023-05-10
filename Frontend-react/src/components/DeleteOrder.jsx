@@ -1,5 +1,5 @@
 import axiosInstance from "../axios.js";
-import { useState, useContext } from "react";
+import {useState, useContext, useEffect} from "react";
 import { XCircleIcon } from "@heroicons/react/24/outline/index.js";
 import AuthContext from "../AuthContext.jsx";
 
@@ -16,6 +16,13 @@ const DeleteOrder = ({ setShow, orderId, refresh }) => {
       setError("Something went wrong. Please try again.");
     }
   };
+
+  useEffect(() => {
+       document.body.className = 'overflow-hidden';
+         return () => {
+                document.body.classList.remove('overflow-hidden');
+         }
+    });
 
   return (
     <div

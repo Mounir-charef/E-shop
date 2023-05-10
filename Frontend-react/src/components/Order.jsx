@@ -1,13 +1,9 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import { XCircleIcon } from "@heroicons/react/24/outline/index.js";
 import DeleteOrder from "./DeleteOrder.jsx";
 const Order = ({ order, refresh }) => {
     const [showDeleteOrderWindow, setShowDeleteOrderWindow] = useState(false);
     const date = new Date(order.created_at).toDateString();
-
-    useEffect(() => {
-        document.body.className = showDeleteOrderWindow ? 'overflow-hidden' : null;
-    }, [showDeleteOrderWindow]);
 
   return (
       <>

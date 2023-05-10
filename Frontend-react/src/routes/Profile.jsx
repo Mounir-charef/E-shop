@@ -40,10 +40,6 @@ const Profile = () => {
 
     }, []);
 
-    useEffect(() => {
-        document.body.className = showBalanceWindow ? 'overflow-hidden' : null;
-    }, [showBalanceWindow]);
-
     if (appState.error) return <ErrorHandler retry={refresh}/>;
     return (
         <>
