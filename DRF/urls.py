@@ -11,14 +11,14 @@ from rest_framework_simplejwt.views import (
 # from rest_framework_swagger.views import get_swagger_view
 
 urlpatterns = [
+    # Admin panel
+    path('admin/', admin.site.urls),
+
     # React Frontend
     path('', include('ecom.urls', namespace='ecom')),
 
     # Ecom API
     path('api/', include('ecom_api.urls', namespace='ecom_api')),
-
-    # Admin panel
-    path('admin/', admin.site.urls),
 
     # Auth
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
