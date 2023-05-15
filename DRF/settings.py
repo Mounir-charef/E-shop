@@ -145,10 +145,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication'
     ],
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_THROTTLE_RATES': {
@@ -169,7 +170,6 @@ REST_FRAMEWORK = {
 
 
 MEDIA_URL = '/products/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'products')
 
 AUTH_USER_MODEL = 'user.User'
 

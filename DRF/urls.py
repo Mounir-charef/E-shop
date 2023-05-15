@@ -7,6 +7,7 @@ from django.conf import settings
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
+    token_verify,
 )
 # from rest_framework_swagger.views import get_swagger_view
 
@@ -28,6 +29,7 @@ urlpatterns = [
     path('api/user/', include('user.urls', namespace='user_api')),
 
     # Rest Auth
+    path('token-verify/', token_verify, name='token_verify'),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
 
