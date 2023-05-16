@@ -23,7 +23,7 @@ class AddBalanceView(UpdateAPIView):
     permission_classes = (IsAuthenticated,)
     serializer_class = RegisterUserSerializer
 
-    def update(self, request, *args, **kwargs):
+    def patch(self, request, *args, **kwargs):
         try:
             user = request.user
             amount = float(request.data.get('amount', 0))
@@ -33,6 +33,10 @@ class AddBalanceView(UpdateAPIView):
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'error': e}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def put(self, request, *args, **kwargs):
+        # return a 405 response, as PUT is not allowed
+        return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
 class CustomUserCreate(APIView):
