@@ -16,6 +16,16 @@ describe('template spec', () => {
     cy.get('button[type="submit"]').click()
     cy.url().should('eq', 'http://127.0.0.1:8000/')
     cy.get('button').contains('Add to cart').focus().click()
+    // Go to profil and add balance
+    cy.get('a[href="/profil"]').click()
+    cy.url().should('include', '/profil')
+    cy.get('button').contains('Add Balance').click()
+    cy.get('input[name="amount"]').type('100')
+    cy.get('button[type="submit"]').click().wait(500)
+    // try delete item
+    cy.get('button:has(svg)').first().click()
+    cy.get('button').contains('Delete').click().wait(500)
+    cy.log('User created, logged in, bought item, added balance and deleted item')
   })
 })
 

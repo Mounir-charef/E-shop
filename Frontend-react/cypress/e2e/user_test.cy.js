@@ -11,5 +11,6 @@ describe('Login, browsing to a product and try to buy it', () => {
     cy.get('img').first().click()
     cy.url().should('include', '/200')
     cy.get('button').contains('Add to cart').focus().click()
+    cy.log('User logged in and tried to buy item')
   })
 })
