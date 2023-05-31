@@ -1,15 +1,23 @@
 {
+  "version": 2,
+  "name": "DRF",
   "builds": [
     {
       "src": "DRF/wsgi.py",
-      "use": "@vercel/python"
+      "use": "@ardnt/now-python-wsgi",
+      "config": {
+        "maxLambdaSize": "30mb"
+      }
+    },
+    {
+      "src": "build_files.sh",
+      "use": "@vercel/static",
+      "config": {
+        "distDir": "staticfiles"
+      }
     }
   ],
   "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
     {
       "src": "/(.*)",
       "dest": "DRF/wsgi.py"
