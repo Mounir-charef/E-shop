@@ -24,6 +24,12 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+
+    # create product manager
+    class ProductManager(models.Manager):
+        def get_queryset(self):
+            return super().get_queryset().filter(status='available')
+
     STATUS_CHOICES = [
         ('available', _('Available')),
         ('out_of_stock', _('Out of Stock')),
@@ -39,6 +45,7 @@ class Product(models.Model):
     status = models.CharField(_("status"), max_length=20, choices=STATUS_CHOICES, default='available')
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("updated at"), auto_now=True)
+    objects = ProductManager()
 
     def __str__(self):
         return self.name
@@ -48,13 +55,12 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_("user"), null=False, blank=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name=_("product"), null=False, blank=False)
     total_price = models.DecimalField(_("total price"), max_digits=8, decimal_places=2, null=False, blank=True)
-    # quantities = models.JSONField(_("quantities"))
     quantity = IntegerRangeField(_("quantity"), default=1, min_value=1, max_value=100)
     created_at = models.DateTimeField(_("created at"), auto_now_add=True)
     updated_at = models.DateTimeField(_("updated at"), auto_now=True)
 
     def __str__(self):
-        return f"the user {self.user} ordered {self.quantity} of {self.product}"
+        return f"order {self.id} : {self.quantity} of {self.product}"
 
 
 class Cart(models.Model):

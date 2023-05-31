@@ -68,7 +68,7 @@ const Item = ({post}) => {
                     }
                 </figure>
                 <p className="text-gray-700 px-2 mt-4 text-sm line-clamp-2">{post.description}</p>
-                {/*I want to add number input field to get quantity of oder*/}
+                {/*TODO: add checks for input field*/}
                 <div>
                     <input
                         ref={inputRef}

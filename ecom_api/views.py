@@ -59,25 +59,6 @@ class CartViewSet(viewsets.ReadOnlyModelViewSet):
 
 
 class OrderViewSet(viewsets.ModelViewSet):
-    """
-    list:
-    Return a list of all the existing orders.
-
-    create:
-    Create a new order instance.
-
-    retrieve:
-    Return the given order.
-
-    update:
-    Update the given order.
-
-    partial_update:
-    Update the given order.
-
-    destroy:
-    Delete the given order.
-    """
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
     pagination_class = CustomCursorPagination
     serializer_class = OrderSerializer
