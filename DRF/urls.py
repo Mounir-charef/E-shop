@@ -49,5 +49,4 @@ urlpatterns = [
     # path('swagger-docs/', get_swagger_view(title='My API'), name='swagger-docs'),
 
     # Static files
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) +\
-    static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
