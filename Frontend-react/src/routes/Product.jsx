@@ -93,7 +93,7 @@ const Product = () => {
                     </div>
           )}
         <div className="md:h-[calc(100vh-5rem)] bg-gradient-to-bl from-[#afd9d8] to-sky-100 mx-auto py-10 px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto grid max-w-5xl bg-white rounded-md grid-cols-1 md:grid-cols-2 gap-10 h-full p-6">
+          <div className="mx-auto shadow-2xl grid max-w-5xl bg-white rounded-md grid-cols-1 md:grid-cols-2 gap-10 h-full p-6">
             <Swiper
               spaceBetween={10}
               navigation={{hideOnClick: true}}

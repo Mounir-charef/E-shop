@@ -1,5 +1,5 @@
 import Item from "./Item.jsx";
-const posts = ({ posts }) => {
+const items = ({ posts }) => {
     if(!posts.length) return <h1 className="text-2xl text-center">No posts found</h1>
     return (
         <div className='p-16'>
@@ -12,4 +12,4 @@ const posts = ({ posts }) => {
     );
 }
 
-export default posts;
+export default items;

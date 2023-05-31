@@ -60,7 +60,7 @@
 
     .card-wrap::after {
       content: attr(data-category);
-      @apply absolute top-0 py-1 px-2 max-w-[calc(100%-60px)] text-xs font-bold text-white bg-[#fdb833] box-border z-auto transition;
+      @apply absolute top-0 py-1 px-2 max-w-[calc(100%-60px)] text-xs font-bold text-white bg-[#fdb833] box-border rounded z-auto transition;
     }
 }
 

@@ -1,4 +1,4 @@
-import Posts from "../components/Posts.jsx";
+import Posts from "../components/Items.jsx";
 import ComponentLoading from "../components/ComponentLoading.jsx";
 import useFetchData from "../hooks/useFetchData.jsx";
 import ErrorHandler from "../components/ErrorHandeler.jsx";
