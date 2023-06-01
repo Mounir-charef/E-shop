@@ -26,7 +26,7 @@ const DeleteOrder = ({ setShow, orderId, refresh }) => {
 
   return (
     <div
-      className='fixed top-0 w-screen h-screen bg-gray-900 bg-opacity-50 z-50'
+      className='fixed inset-0 bg-gray-900 bg-opacity-50 z-50'
     >
       <div className="w-full max-w-md bg-white rounded-md mt-[40vh] mx-auto mt-20 p-6">
         <div className="flex justify-between items-center">
