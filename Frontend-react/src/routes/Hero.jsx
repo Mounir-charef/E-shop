@@ -17,7 +17,7 @@ const Hero = () => {
 
 
     return (
-        <div className='min-h-fit'>
+        <div className='min-h-[calc(100vh-5rem)]'>
             <PostLoadingComponent isLoading={appState.loading} posts={appState.posts} />
 
             {!appState.loading &&

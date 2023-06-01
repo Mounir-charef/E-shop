@@ -4,7 +4,7 @@ import facebook_icon from '../assets/icon-facebook.svg'
 import linkedin_icon from '../assets/icons8-linkedin.svg'
 const Footer = () => {
     return (
-        <div className='flex gap-4 flex-col flex-1 justify-center items-center w-full h-28 bg-slate-700'>
+        <div className='flex w-full h-28 gap-4 flex-col flex-1 justify-center items-center bg-slate-700'>
             <p className='text-white text-sm'>Copyright &copy; {new Date().getFullYear()}, All Rights Mounir Charef</p>
             <div className="flex justify-center gap-3">
                 <a href="https://www.facebook.com/Chrf.Mounir" target='_blank'>

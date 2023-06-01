@@ -44,12 +44,11 @@ const Profile = () => {
     return (
         <>
             {showBalanceWindow && <AddBalance setShow={setShowBalanceWindow} refresh={refresh}/>}
-            <div className='bg-gradient-to-bl from-[#afd9d8] to-sky-100 py-12'>
-                <div>
-                    <div className='w-4/5 lg:w-2/5 bg-white shadow-2xl mx-auto mb-12 rounded-md p-12'>
-                        <h1 className='text-center font-semibold text-5xl'>Profile</h1>
-                        <div className='pt-6'>
-                            <div className="flex flex-col gap-2 items-center whitespace-nowrap w-full justify-center">
+            <div className='bg-gradient-to-bl gap-2 flex flex-col lg:flex-row from-[#afd9d8] to-sky-100 py-12 px-5'>
+
+                    <div className='w-fit h-fit bg-transparent mx-auto mb-12 rounded-md lg:sticky lg:top-24'>
+                        <div>
+                            <div className="flex flex-col gap-2 whitespace-nowrap w-full justify-center">
                                 {loading ? (
                                     <>
                                         <Rings
@@ -63,11 +62,14 @@ const Profile = () => {
                                     </>
                                 ) : (
                                     <>
-                                        <p className="text-lg font-semibold">{user.user_name}</p>
-                                        <p className="text-lg font-semibold">{user.email}</p>
-                                        <p className="text-lg font-semibold">Your Balance: {user.balance}$</p>
+                                        <div className="flex gap-3 items-end">
+                                            <img className='w-10 h-10 rounded-full ring-2 ring-sky-300' src={user.image_url} alt='profil' />
+                                            <p className="text-lg font-semibold">{user.user_name}</p>
+                                        </div>
+                                        <p className="text-lg font-semibold">Email : {user.email}</p>
+                                        <p className="text-lg font-semibold">Balance : {user.balance}$</p>
                                         <button
-                                            className="active-btn rounded"
+                                            className="active-btn rounded w-fit mt-2"
                                             onClick={() => setShowBalanceWindow(true)}
                                         >
                                             Add Balance
@@ -77,8 +79,7 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className=' w-[90%] lg:w-3/5 bg-white shadow-2xl mx-auto rounded p-6 md:p-12'>
+                <div className=' w-[90%] basis-2/3 lg:w-3/5 bg-white shadow-2xl mx-auto rounded p-6 md:p-12'>
                     <h1 className='text-center font-semibold text-5xl'>Orders</h1>
                     <div className='flex flex-col p-6 pb-0 gap-8'>
                         <div className="flex justify-between items-center">

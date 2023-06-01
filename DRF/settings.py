@@ -32,6 +32,7 @@ DEBUG = os.getenv('DEBUG', False)
 DEVELOPMENT_MODE = os.getenv('DEVELOPMENT_MODE', False)
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
+ALLOWED_HOSTS.append('f70b-41-105-204-124.ngrok-free.app')
 
 # cors allow localhost:5173
 CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://127.0.0.1:8000']
