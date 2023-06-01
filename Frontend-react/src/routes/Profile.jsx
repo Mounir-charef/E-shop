@@ -44,11 +44,11 @@ const Profile = () => {
     return (
         <>
             {showBalanceWindow && <AddBalance setShow={setShowBalanceWindow} refresh={refresh}/>}
-            <div className='bg-gradient-to-bl gap-2 flex flex-col  lg:justify-between lg:flex-row from-[#afd9d8] to-sky-100 py-12 px-36'>
+            <div className='bg-gradient-to-bl min-h-[calc(100vh-5rem)] px-12 flex flex-col  lg:justify-between lg:flex-row from-[#afd9d8] to-sky-100 py-12 lg:px-32'>
 
-                <div className='w-fit h-fit bg-transparent self-start mb-12 rounded-md lg:sticky lg:top-24'>
+                <div className='w-fit h-fit self-start mb-12 rounded-md lg:sticky lg:top-24'>
                         <div>
-                            <div className="flex flex-col gap-2 whitespace-nowrap w-full justify-center">
+                            <div className="flex flex-col gap-2  whitespace-nowrap w-full justify-center p-2">
                                 {loading ? (
                                     <>
                                         <Rings
@@ -79,61 +79,65 @@ const Profile = () => {
                             </div>
                         </div>
                 </div>
-                <div className='basis-2/3 bg-white shadow-2xl rounded p-6'>
-                    <h1 className='text-center font-semibold text-5xl'>Orders</h1>
-                    <div className='flex flex-col p-6 pb-0 gap-8'>
-                        <div className="flex justify-between items-center">
-                            <button
-                                className={
-                                    appState.previous !== null ? "active-btn" :
-                                        "disabled-btn"
-                                }
-                                onClick={getNextPage}
-                                name='prev'
-                                disabled={appState.previous === null}
-                            >
-                                Previous Page
-                            </button>
-                            <button
-                                className={
-                                    appState.next !== null ? "active-btn" :
-                                        "disabled-btn"
-                                }
-                                onClick={getNextPage}
-                                name='next'
-                                disabled={appState.next === null}
+                <div className={`basis-2/3 grow lg:grow-0 bg-white shadow-2xl rounded p-6 ${!appState.orders?.length ? 'grid place-items-center' : null}`}>
+                    {appState.orders?.length ? (
+                        <>
+                            <h1 className='text-center font-semibold text-5xl'>Orders</h1>
+                            <div className='flex flex-col p-6 pb-0 gap-8'>
+                                <div className="flex justify-between items-center">
+                                    <button
+                                        className={
+                                            appState.previous !== null ? "active-btn" :
+                                                "disabled-btn"
+                                        }
+                                        onClick={getNextPage}
+                                        name='prev'
+                                        disabled={appState.previous === null}
+                                    >
+                                        Previous Page
+                                    </button>
+                                    <button
+                                        className={
+                                            appState.next !== null ? "active-btn" :
+                                                "disabled-btn"
+                                        }
+                                        onClick={getNextPage}
+                                        name='next'
+                                        disabled={appState.next === null}
 
-                            >
-                                Next Page
-                            </button>
-                        </div>
-                        <OrderLoadingComponent isLoading={appState.loading} orders={appState.orders} refresh={refresh}/>
-                        <div className="flex justify-between items-center">
-                            <button
-                                className={
-                                    appState.previous !== null ? "active-btn" :
-                                        "disabled-btn"
-                                }
-                                onClick={getNextPage}
-                                name='prev'
-                                disabled={appState.previous === null}
-                            >
-                                Previous Page
-                            </button>
-                            <button
-                                className={
-                                    appState.next !== null ? "active-btn" :
-                                        "disabled-btn"
-                                }
-                                onClick={getNextPage}
-                                name='next'
-                                disabled={appState.next === null}
+                                    >
+                                        Next Page
+                                    </button>
+                                </div>
+                                <OrderLoadingComponent isLoading={appState.loading} orders={appState.orders} refresh={refresh}/>
+                                <div className="flex justify-between items-center">
+                                    <button
+                                        className={
+                                            appState.previous !== null ? "active-btn" :
+                                                "disabled-btn"
+                                        }
+                                        onClick={getNextPage}
+                                        name='prev'
+                                        disabled={appState.previous === null}
+                                    >
+                                        Previous Page
+                                    </button>
+                                    <button
+                                        className={
+                                            appState.next !== null ? "active-btn" :
+                                                "disabled-btn"
+                                        }
+                                        onClick={getNextPage}
+                                        name='next'
+                                        disabled={appState.next === null}
 
-                            >
-                                Next Page
-                            </button>
-                        </div>
-                    </div>
+                                    >
+                                        Next Page
+                                    </button>
+                                </div>
+                            </div>
+                        </>
+                    ) : <OrderLoadingComponent isLoading={appState.loading} orders={appState.orders} refresh={refresh}/>}
                 </div>
             </div>
         </>
