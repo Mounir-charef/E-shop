@@ -1,13 +1,14 @@
 import axiosInstance from "../axios.js";
-import { useState, useContext } from "react";
+import {useState, useContext, useEffect} from "react";
 import AuthContext from "../AuthContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import RegisterForm from "../components/RegisterForm.jsx";
 import {useMessage} from "../hooks/useMessage.jsx";
+import jwt_decode from "jwt-decode";
 
 const Register = () => {
   const { message, showMessage } = useMessage(4000);
-  const { baseUrl } = useContext(AuthContext);
+  const { baseUrl, token, setToken } = useContext(AuthContext);
   const navigate = useNavigate();
   const initialFormData = Object.freeze({
     username: "",
@@ -39,6 +40,17 @@ const Register = () => {
       });
     setFormData(initialFormData);
   };
+
+  useEffect(() => {
+
+        if (token !== null) {
+            const tokenParts = jwt_decode(token);
+            const now = Math.ceil(Date.now() / 1000);
+            if (tokenParts.exp < now) {
+                setToken(null);
+            } else navigate("/")
+        }
+    }, [token])
 
   return (
     <>
