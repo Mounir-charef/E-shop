@@ -10,6 +10,10 @@
 - On the frontend, we will use React to build a responsive user interface. React is an efficient and flexible JavaScript library for building user interfaces. It is well-suited for building complex applications with high interactivity.
 
 ![image](https://github.com/lolifmaster/E-shop/assets/74158138/386e3c6d-a9c5-4485-817f-5d6fa19c5bd5)
+![image](https://github.com/lolifmaster/E-shop/assets/74158138/6220789c-4a2f-4c69-8a69-9d88a497880e)
+
+- Profile page
+![image](https://github.com/lolifmaster/E-shop/assets/74158138/5f7d603a-a2d3-4e6a-b76f-75b58f8df1fe)
 
 
 - We will use CoreAPI for documentation and schema management. CoreAPI is a powerful tool that provides automatic API documentation, interactive API exploration, and schema management. Using CoreAPI will make it easier for our team to work together and communicate effectively.
