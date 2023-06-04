@@ -4,7 +4,7 @@
   "builds": [
     {
       "src": "DRF/wsgi.py",
-      "use": "@vercel/python3.10"
+      "use": "@vercel/python"
     },
     {
       "src": "build_files.sh",
