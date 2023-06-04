@@ -66,7 +66,8 @@ const Product = () => {
 
   if (loading) {
     return (
-      <div className="h-96 flex justify-center items-center">
+      <div className='min-h-[calc(100vh-5rem)]'>
+          <div className="h-96 flex justify-center items-center">
 					<Rings
 					  height="100"
 					  width="100"
@@ -75,6 +76,7 @@ const Product = () => {
 					  visible={true}
 					  ariaLabel="rings-loading"
 					/>
+        </div>
       </div>
     );
   }

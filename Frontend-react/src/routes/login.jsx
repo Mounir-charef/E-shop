@@ -35,7 +35,7 @@ const login = () => {
                     axiosInstance.defaults.headers['Authorization'] = "JWT " + res.data.access;
                     setToken(res.data.access);
             }).catch(() => {
-                showMessage({text: "Invalid credentials", type: "error"});
+                showMessage({text: "Invalid credentials, check you email and password", type: "error"});
         });
         setFormData(initialFormData);
     }
