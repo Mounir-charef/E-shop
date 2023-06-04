@@ -2,12 +2,17 @@ import Posts from "../components/Items.jsx";
 import ComponentLoading from "../components/ComponentLoading.jsx";
 import useFetchData from "../hooks/useFetchData.jsx";
 import ErrorHandler from "../components/ErrorHandeler.jsx";
-import {useContext} from "react";
+import {useContext, useRef} from "react";
 import AuthContext from "../AuthContext.jsx";
 
 const Hero = () => {
     const {baseUrl} = useContext(AuthContext);
     const PostLoadingComponent = ComponentLoading(Posts),
+        ref = useRef(null),
+        scrollToRef = (ref) => window.scrollTo({
+            top: ref.current.offsetTop - 100,
+            behavior: "smooth"
+        }),
         {appState, getNextPage, getInitialPage} = useFetchData(baseUrl + 'api/products/');
     const hasPrevious = appState.previous !== null,
         hasNext = appState.next !== null;
@@ -16,8 +21,9 @@ const Hero = () => {
 
 
 
+
     return (
-        <div className='min-h-[calc(100vh-5rem)]'>
+        <div className='min-h-[calc(100vh-5rem)]' ref={ref}>
             <PostLoadingComponent isLoading={appState.loading} posts={appState.posts} />
 
             {!appState.loading &&
@@ -28,7 +34,10 @@ const Hero = () => {
                             hasPrevious ? "active-btn" :
                                 "disabled-btn"
                         }
-                        onClick={getNextPage}
+                        onClick={e => {
+                                scrollToRef(ref);
+                                getNextPage(e).catch(console.error);
+                            }}
                         name='prev'
                         disabled={appState.previous === null}
                     >
@@ -39,7 +48,10 @@ const Hero = () => {
                             hasNext ? "active-btn" :
                                 "disabled-btn"
                         }
-                        onClick={getNextPage}
+                        onClick={e => {
+                            scrollToRef(ref);
+                            getNextPage(e).catch(console.error);
+                        }}
                         name='next'
                         disabled={appState.next === null}
 

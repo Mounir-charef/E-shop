@@ -32,7 +32,7 @@ DEBUG = os.getenv('DEBUG', False)
 DEVELOPMENT_MODE = os.getenv('DEVELOPMENT_MODE', False)
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
-ALLOWED_HOSTS.append('20a0-41-109-77-1.ngrok-free.app')
+# ALLOWED_HOSTS.append('20a0-41-109-77-1.ngrok-free.app')
 
 # cors allow localhost:5173
 CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://127.0.0.1:8000']
@@ -94,13 +94,9 @@ WSGI_APPLICATION = 'DRF.wsgi.app'
 
 DATABASES = {
     'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'railway',
-            'USER': 'postgres',
-            'PASSWORD': 'XkHipPj9Dkav4Yn8Egfo',
-            'HOST': 'containers-us-west-171.railway.app',
-            'PORT': '6010',
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 GRAPH_MODELS = {
