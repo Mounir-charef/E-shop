@@ -11,6 +11,7 @@ const useFetchData = (url) => {
         search = new URLSearchParams(window.location.search).get('search');
 
     const getNextPage = async (e) => {
+        setAppState({ loading: true, error: false, posts: null, next: null, previous: null})
         const url = e.target.name === "next" ? appState.next : appState.previous;
         axiosInstance.get(url).then((res) => {
             const data = res.data;

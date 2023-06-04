@@ -66,10 +66,16 @@ const Profile = () => {
                                             <img className='w-10 h-10 rounded-full ring-2 ring-sky-300' src={user.image_url} alt='profil' />
                                             <p className="text-lg font-semibold">{user.user_name}</p>
                                         </div>
-                                        <p className="text-lg font-semibold">Email : {user.email}</p>
-                                        <p className="text-lg font-semibold">Balance : {user.balance}$</p>
+                                        <div className="flex justify-between">
+                                            <p className="sm:w-1/4">Email :</p>
+                                            <p className="font-semibold">{user.email}</p>
+                                        </div>
+                                        <div className="flex justify-between">
+                                            <p className="sm:w-1/4">Balance :</p>
+                                            <p className="font-semibold">{user.balance}.00 €</p>
+                                        </div>
                                         <button
-                                            className="active-btn rounded w-fit mt-2"
+                                            className="active-btn rounded-xl px-12 w-fit mt-2"
                                             onClick={() => setShowBalanceWindow(true)}
                                         >
                                             Add Balance

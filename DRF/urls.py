@@ -9,7 +9,6 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     token_verify,
 )
-# from rest_framework_swagger.views import get_swagger_view
 
 urlpatterns = [
     # Admin panel
@@ -43,10 +42,9 @@ urlpatterns = [
 
     # Docs
     path('docs/', include_docs_urls(
-        title="Ecom API",
+        title="E-Shop API",
         description="API for the E-Shop market",
     ), name='eshop-docs'),
-    # path('swagger-docs/', get_swagger_view(title='My API'), name='swagger-docs'),
 
     # Static files
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

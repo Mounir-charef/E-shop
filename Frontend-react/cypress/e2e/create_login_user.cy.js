@@ -25,7 +25,7 @@ describe('template spec', () => {
     // try delete item
     cy.get('button:has(svg)').first().click()
     cy.get('button').contains('Delete').click().wait(500)
-    cy.log('User created, logged in, bought item, added balance and deleted item')
+    cy.log('User created, logged in, bought item, added balance and cancel an order')
   })
 })
 

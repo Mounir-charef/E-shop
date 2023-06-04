@@ -30,7 +30,7 @@ const DeleteOrder = ({ setShow, orderId, refresh }) => {
     >
       <div className="w-full max-w-md bg-white rounded-md mt-[40vh] mx-auto mt-20 p-6">
         <div className="flex justify-between items-center">
-          <h3 className="text-lg font-medium text-gray-700">Delete Order</h3>
+          <h3 className="text-lg font-medium text-gray-700">Cancel order</h3>
           <button onClick={() => setShow(false)}>
             <XCircleIcon className="h-6 w-6 text-gray-500 hover:text-gray-700 cursor-pointer" />
           </button>
