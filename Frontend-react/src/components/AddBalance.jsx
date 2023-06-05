@@ -10,7 +10,7 @@ const AddBalance = ({ setShow, refresh }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (amount === "") {
+    if (amount === "" || amount === "0") {
       setError("Amount is required.");
       return;
     }
@@ -25,8 +25,8 @@ const AddBalance = ({ setShow, refresh }) => {
 
   const handleAmountChange = (e) => {
     const inputAmount = e.target.value;
-    if (isNaN(inputAmount)) {
-      setError("Amount should be a number.");
+    if (isNaN(inputAmount) || inputAmount < 0) {
+      setError("Amount should be a positive number.");
     } else {
       setError("");
       setAmount(inputAmount);

@@ -67,6 +67,12 @@ class OrderViewSet(viewsets.ModelViewSet):
         return Order.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
+        # check if the quantity is not zero or negative
+        if serializer.validated_data['quantity'] <= 0:
+            raise serializers.ValidationError(
+                {'message': "Quantity must be greater than zero"},
+                code=400
+            )
         # check if log in user has money to pay for the order
         total_price = serializer.validated_data['product'].price * serializer.validated_data['quantity']
         if self.request.user.balance >= total_price:
