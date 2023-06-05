@@ -47,4 +47,4 @@ urlpatterns = [
     ), name='eshop-docs'),
 
     # Static files
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]
