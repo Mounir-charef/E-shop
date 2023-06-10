@@ -3,7 +3,6 @@ from .models import *
 
 
 class ProductSerializer(serializers.ModelSerializer):
-    status = serializers.ChoiceField(choices=[])
     category_name = serializers.CharField(source='category.name', read_only=True)
 
     class Meta:

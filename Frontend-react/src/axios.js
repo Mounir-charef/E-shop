@@ -1,11 +1,13 @@
 import axios from 'axios';
 import jwt_decode from "jwt-decode";
 
-const baseURL = 'http://localhost:8000/api/';
+// in production, this will be the url of the deployed backend
+const baseURL = 'api/';
+// in development, this will be the url of the backend
+// const baseURL = 'http://localhost:8000/api/';
 
 
 const axiosInstance = axios.create({
-	timeout: 5000,
     headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
