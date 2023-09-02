@@ -31,7 +31,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = os.getenv('DEBUG') == 'True'
 DEVELOPMENT_MODE = os.getenv('DEVELOPMENT_MODE') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 # ALLOWED_HOSTS.append('20a0-41-109-77-1.ngrok-free.app')
 
 # cors allow localhost:5173

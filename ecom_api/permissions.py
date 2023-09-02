@@ -1,15 +1,11 @@
 from rest_framework import permissions
-
+from django.utils.translation import gettext as _
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
-    message = "Editing Products is restricted to the owner only."
-
+    message = _("Editing Products is restricted to the owner only.")
     def has_object_permission(self, request, view, obj):
-        # Read permissions are allowed to any request
         if request.method in permissions.SAFE_METHODS:
             return True
-
-        # Write permissions are only allowed to the owner of the product
         return obj.user == request.user
 
 
