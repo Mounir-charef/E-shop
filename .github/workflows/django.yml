@@ -10,6 +10,10 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+     DEBUG: 'true'
+     DEVELOPMENT_MODE: 'true'
+     SECRET_KEY: '#@kb@xy87xxbks59-pbvd^1g-!9v%q&$hb^7unmf$^(l#lu-uj'
     strategy:
       max-parallel: 4
       matrix:
@@ -18,6 +22,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
+
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
